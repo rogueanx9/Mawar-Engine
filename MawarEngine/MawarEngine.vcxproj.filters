@@ -18,13 +18,13 @@
     <ClInclude Include="src\Mawar\Core.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Mawar\Application.h">
+    <ClInclude Include="src\Mawar\Application.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\MawarEngine.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Mawar\EntryPoint.h">
+    <ClInclude Include="src\Mawar\EntryPoint.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Application.h"
+#include "Application.hpp"
 
 #ifdef M_PLATFORM_W10
 

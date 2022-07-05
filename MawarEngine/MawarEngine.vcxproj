@@ -12,9 +12,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\MawarEngine.hpp" />
-    <ClInclude Include="src\Mawar\Application.h" />
+    <ClInclude Include="src\Mawar\Application.hpp" />
     <ClInclude Include="src\Mawar\Core.hpp" />
-    <ClInclude Include="src\Mawar\EntryPoint.h" />
+    <ClInclude Include="src\Mawar\EntryPoint.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Mawar\Application.cpp" />

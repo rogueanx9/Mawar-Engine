@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Mawar/Application.h"
+#include "Mawar/Application.hpp"
 
 //--- Entry Point ---
-#include "Mawar/EntryPoint.h"
+#include "Mawar/EntryPoint.hpp"
 //-------------------

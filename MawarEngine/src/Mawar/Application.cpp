@@ -1,4 +1,4 @@
-#include "Application.h"
+#include "Application.hpp"
 #include <stdio.h>
 
 namespace Mawar
