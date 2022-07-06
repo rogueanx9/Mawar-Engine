@@ -1,5 +1,4 @@
 #include "Application.hpp"
-#include <stdio.h>
 
 namespace Mawar
 {
@@ -8,7 +7,6 @@ namespace Mawar
 
 	void Application::Run()
 	{
-		printf("Mawar Engine is running...\n");
 		while (true);
 	}
 }

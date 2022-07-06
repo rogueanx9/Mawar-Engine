@@ -27,9 +27,15 @@
     <ClInclude Include="src\Mawar\EntryPoint.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Mawar\Log.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Mawar\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mawar\Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

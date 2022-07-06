@@ -1,0 +1,3 @@
+[submodule "MawarEngine/vendor/spdlog"]
+	path = MawarEngine/vendor/spdlog
+	url = https://github.com/gabime/spdlog

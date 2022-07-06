@@ -11,12 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Mawar\Log.hpp" />
     <ClInclude Include="src\MawarEngine.hpp" />
     <ClInclude Include="src\Mawar\Application.hpp" />
     <ClInclude Include="src\Mawar\Core.hpp" />
     <ClInclude Include="src\Mawar\EntryPoint.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Mawar\Log.cpp" />
     <ClCompile Include="src\Mawar\Application.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -68,6 +70,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>M_PLATFORM_W10;M_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)MawarEngine\vendor\spdlog\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -82,6 +85,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>M_PLATFORM_W10;M_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)MawarEngine\vendor\spdlog\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
