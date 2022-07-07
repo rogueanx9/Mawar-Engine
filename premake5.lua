@@ -25,6 +25,7 @@ project "MawarEngine"
 	
 	includedirs
 	{
+		"src",
 		"%{prj.name}/vendor/spdlog/include"
 	}
 	

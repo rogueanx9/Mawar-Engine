@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Core.hpp"
+#include "Events/Event.hpp"
+
 namespace Mawar
 {
 	class M_API Application

@@ -19,6 +19,10 @@
       <Filter>Mawar</Filter>
     </ClInclude>
     <ClInclude Include="src\MawarEngine.hpp" />
+    <ClInclude Include="src\Mawar\Events\Event.hpp" />
+    <ClInclude Include="src\Mawar\Events\ApplicationEvent.hpp" />
+    <ClInclude Include="src\Mawar\Events\MouseEvent.hpp" />
+    <ClInclude Include="src\Mawar\Events\KeyEvent.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Mawar\Application.cpp">
