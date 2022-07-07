@@ -7,9 +7,7 @@ extern Mawar::Application* Mawar::CreateApplication();
 int main()
 {
 	Mawar::Log::Init();
-	M_CORE_WARN("Initialized Log!");
-	int x = 5;
-	M_INFO("int x = {0};", x);
+	M_CORE_INFO("Initialized Log!");
 
 	Mawar::Application* app = Mawar::CreateApplication();
 	app->Run();
