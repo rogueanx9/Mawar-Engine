@@ -2,8 +2,6 @@
 
 #include "Event.hpp"
 
-#include <sstream>
-
 namespace Mawar
 {
 	class KeyEvent : public Event

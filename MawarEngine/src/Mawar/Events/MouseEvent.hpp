@@ -2,8 +2,6 @@
 
 #include "Event.hpp"
 
-#include <sstream>
-
 namespace Mawar
 {
 	class M_API MouseMovedEvent : public Event

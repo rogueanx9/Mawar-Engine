@@ -1,9 +1,7 @@
 #pragma once
 
+#include "mpch.hpp"
 #include "Mawar/Core.hpp"
-
-#include <string>
-#include <functional>
 
 namespace Mawar
 {
@@ -35,7 +33,7 @@ namespace Mawar
 
 #define EVENT_CLASS_CATEGORY(category) int GetCategoryFlags() const override { return category; }
 
-	class M_API Event
+	class Event
 	{
 		friend class EventDispatcher;
 	public:

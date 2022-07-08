@@ -1,3 +1,4 @@
+#include "mpch.hpp"
 #include "Application.hpp"
 
 #include "Events/ApplicationEvent.hpp"

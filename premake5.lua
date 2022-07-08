@@ -16,6 +16,9 @@ project "MawarEngine"
 	
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	pchheader "mpch.hpp"
+	pchsource "MawarEngine/src/mpch.cpp"
 	
 	files
 	{
@@ -25,7 +28,7 @@ project "MawarEngine"
 	
 	includedirs
 	{
-		"src",
+		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include"
 	}
 	

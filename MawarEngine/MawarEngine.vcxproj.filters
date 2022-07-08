@@ -4,6 +4,9 @@
     <Filter Include="Mawar">
       <UniqueIdentifier>{DD96A70D-49AB-CFBE-122D-731E7E00CCEF}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mawar\Events">
+      <UniqueIdentifier>{2148CD9E-0DAB-5C43-B630-95F9A27228C6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Mawar\Application.hpp">
@@ -15,14 +18,23 @@
     <ClInclude Include="src\Mawar\EntryPoint.hpp">
       <Filter>Mawar</Filter>
     </ClInclude>
+    <ClInclude Include="src\Mawar\Events\ApplicationEvent.hpp">
+      <Filter>Mawar\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mawar\Events\Event.hpp">
+      <Filter>Mawar\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mawar\Events\KeyEvent.hpp">
+      <Filter>Mawar\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mawar\Events\MouseEvent.hpp">
+      <Filter>Mawar\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\Mawar\Log.hpp">
       <Filter>Mawar</Filter>
     </ClInclude>
     <ClInclude Include="src\MawarEngine.hpp" />
-    <ClInclude Include="src\Mawar\Events\Event.hpp" />
-    <ClInclude Include="src\Mawar\Events\ApplicationEvent.hpp" />
-    <ClInclude Include="src\Mawar\Events\MouseEvent.hpp" />
-    <ClInclude Include="src\Mawar\Events\KeyEvent.hpp" />
+    <ClInclude Include="src\mpch.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Mawar\Application.cpp">
@@ -31,5 +43,6 @@
     <ClCompile Include="src\Mawar\Log.cpp">
       <Filter>Mawar</Filter>
     </ClCompile>
+    <ClCompile Include="src\mpch.cpp" />
   </ItemGroup>
 </Project>
