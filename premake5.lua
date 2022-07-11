@@ -9,6 +9,12 @@ workspace "MawarEngine"
 	
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include Dirs array
+IncludeDir = {}
+IncludeDir["GLFW"] = "MawarEngine/vendor/GLFW/include"
+
+include "MawarEngine/vendor/GLFW"
+
 project "MawarEngine"
 	location "MawarEngine"
 	kind "SharedLib"
@@ -29,7 +35,14 @@ project "MawarEngine"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+	
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
 	}
 	
 	filter "system:windows"
@@ -40,7 +53,8 @@ project "MawarEngine"
 		defines
 		{
 			"M_PLATFORM_W10",
-			"M_BUILD_DLL"
+			"M_BUILD_DLL",
+			"M_ENABLE_ASSERT"
 		}
 		
 		postbuildcommands
@@ -50,10 +64,14 @@ project "MawarEngine"
 		}
 
 	filter "configurations:Debug"
+		staticruntime "Off"
+		runtime "Debug"
 		defines "M_DEBUG"
 		symbols "On"
 		
 	filter "configurations:Release"
+		staticruntime "Off"
+		runtime "Release"
 		defines "M_RELEASE"
 		optimize "On"
 		

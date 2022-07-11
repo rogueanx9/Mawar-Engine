@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Core.hpp"
-#include "Events/Event.hpp"
+#include "Mawar/Events/Event.hpp"
+#include "Mawar/Window.hpp"
 
 namespace Mawar
 {
@@ -12,6 +13,10 @@ namespace Mawar
 		virtual ~Application();
 
 		void Run();
+
+	private:
+		std::unique_ptr<Window> m_Window;
+		bool m_Running = true;
 	};
 
 	// To be defined on client

@@ -6,22 +6,25 @@
 #include "Events/MouseEvent.hpp"
 #include "Log.hpp"
 
+#include <GLFW/glfw3.h>
+
 namespace Mawar
 {
-	Application::Application() {}
+	Application::Application()
+	{
+		m_Window = std::unique_ptr<Window>(Window::Create());
+	}
+
 	Application::~Application() {}
 
 	void Application::Run()
 	{
-		WindowResizeEvent e{ 1280,720 };
-		M_TRACE(e);
-
-		KeyPressedEvent e1{ 10, 1 };
-		M_TRACE(e1);
-
-		MouseMovedEvent e2{ 100,50 };
-		M_TRACE(e2);
-
-		while (true);
+		while (m_Running)
+		{
+			m_Running = !(glfwWindowShouldClose(m_Window->GetGLFWWindow()));
+			glClearColor(0.2, 0.5, 0.8, 1);
+			glClear(GL_COLOR_BUFFER_BIT);
+			m_Window->OnUpdate();
+		}
 	}
 }
