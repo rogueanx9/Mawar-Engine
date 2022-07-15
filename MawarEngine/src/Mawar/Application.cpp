@@ -1,7 +1,6 @@
 #include "mpch.hpp"
 #include "Application.hpp"
 
-#include "Events/ApplicationEvent.hpp"
 #include "Events/KeyEvent.hpp"
 #include "Events/MouseEvent.hpp"
 #include "Log.hpp"
@@ -10,21 +9,36 @@
 
 namespace Mawar
 {
+#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
+
 	Application::Application()
 	{
 		m_Window = std::unique_ptr<Window>(Window::Create());
+		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 	}
 
 	Application::~Application() {}
+
+	void Application::OnEvent(Event& e)
+	{
+		EventDispatcher dispatcher{ e };
+		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClosed)); // TODO
+		M_CORE_TRACE("{0}", e);
+	}
 
 	void Application::Run()
 	{
 		while (m_Running)
 		{
-			m_Running = !(glfwWindowShouldClose(m_Window->GetGLFWWindow()));
 			glClearColor(0.2, 0.5, 0.8, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 			m_Window->OnUpdate();
 		}
+	}
+
+	bool Application::OnWindowClosed(WindowCloseEvent&)
+	{
+		m_Running = false;
+		return true;
 	}
 }

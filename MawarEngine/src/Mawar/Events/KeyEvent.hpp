@@ -50,8 +50,5 @@ namespace Mawar
 		}
 
 		EVENT_CLASS_TYPE(KeyReleased);
-
-	private:
-		int m_RepeatCount;
 	};
 }

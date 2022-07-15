@@ -33,7 +33,7 @@ namespace Mawar
 
 #define EVENT_CLASS_CATEGORY(category) int GetCategoryFlags() const override { return category; }
 
-	class Event
+	class Event // Interface
 	{
 		friend class EventDispatcher;
 	public:
@@ -59,7 +59,7 @@ namespace Mawar
 		template <typename T>
 		bool Dispatch(EventFn<T> func)
 		{
-			if (m_Event.GetEventType() == T::getStaticType())
+			if (m_Event.GetEventType() == T::getStaticEventType())
 			{
 				m_Event.m_Handled = func(*(T*)&m_Event);
 				return true;

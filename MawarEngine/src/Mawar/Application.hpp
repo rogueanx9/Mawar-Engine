@@ -2,6 +2,7 @@
 
 #include "Core.hpp"
 #include "Mawar/Events/Event.hpp"
+#include "Events/ApplicationEvent.hpp"
 #include "Mawar/Window.hpp"
 
 namespace Mawar
@@ -12,9 +13,12 @@ namespace Mawar
 		Application();
 		virtual ~Application();
 
+		void OnEvent(Event& e);
+
 		void Run();
 
 	private:
+		bool OnWindowClosed(WindowCloseEvent&);
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
 	};
