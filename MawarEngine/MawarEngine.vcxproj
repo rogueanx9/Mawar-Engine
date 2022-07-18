@@ -84,6 +84,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -109,7 +110,8 @@ copy /B /Y ..\bin\Debug-windows-x86_64\MawarEngine\MawarEngine.dll ..\bin\Debug-
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -136,7 +138,8 @@ copy /B /Y ..\bin\Release-windows-x86_64\MawarEngine\MawarEngine.dll ..\bin\Rele
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -159,6 +162,8 @@ copy /B /Y ..\bin\Dist-windows-x86_64\MawarEngine\MawarEngine.dll ..\bin\Dist-wi
     <ClInclude Include="src\Mawar\Events\Event.hpp" />
     <ClInclude Include="src\Mawar\Events\KeyEvent.hpp" />
     <ClInclude Include="src\Mawar\Events\MouseEvent.hpp" />
+    <ClInclude Include="src\Mawar\Layer.hpp" />
+    <ClInclude Include="src\Mawar\LayerStack.hpp" />
     <ClInclude Include="src\Mawar\Log.hpp" />
     <ClInclude Include="src\Mawar\Window.hpp" />
     <ClInclude Include="src\MawarEngine.hpp" />
@@ -167,6 +172,8 @@ copy /B /Y ..\bin\Dist-windows-x86_64\MawarEngine\MawarEngine.dll ..\bin\Dist-wi
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Mawar\Application.cpp" />
+    <ClCompile Include="src\Mawar\Layer.cpp" />
+    <ClCompile Include="src\Mawar\LayerStack.cpp" />
     <ClCompile Include="src\Mawar\Log.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\mpch.cpp">

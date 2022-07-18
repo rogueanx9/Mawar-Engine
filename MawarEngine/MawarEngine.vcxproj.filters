@@ -36,6 +36,12 @@
     <ClInclude Include="src\Mawar\Events\MouseEvent.hpp">
       <Filter>Mawar\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Mawar\Layer.hpp">
+      <Filter>Mawar</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mawar\LayerStack.hpp">
+      <Filter>Mawar</Filter>
+    </ClInclude>
     <ClInclude Include="src\Mawar\Log.hpp">
       <Filter>Mawar</Filter>
     </ClInclude>
@@ -50,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Mawar\Application.cpp">
+      <Filter>Mawar</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mawar\Layer.cpp">
+      <Filter>Mawar</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mawar\LayerStack.cpp">
       <Filter>Mawar</Filter>
     </ClCompile>
     <ClCompile Include="src\Mawar\Log.cpp">

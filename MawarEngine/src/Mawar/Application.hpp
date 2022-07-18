@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Core.hpp"
+#include "Mawar/Core.hpp"
 #include "Mawar/Events/Event.hpp"
-#include "Events/ApplicationEvent.hpp"
+#include "Mawar/Events/ApplicationEvent.hpp"
 #include "Mawar/Window.hpp"
+#include "Mawar/LayerStack.hpp"
 
 namespace Mawar
 {
@@ -14,12 +15,15 @@ namespace Mawar
 		virtual ~Application();
 
 		void OnEvent(Event& e);
-
 		void Run();
 
+		void PushLayer(Layer* layer);
+		void PushOverlay (Layer* layer);
+
 	private:
-		bool OnWindowClosed(WindowCloseEvent&);
 		std::unique_ptr<Window> m_Window;
+		LayerStack m_LayerStack;
+		bool OnWindowClosed(WindowCloseEvent&);
 		bool m_Running = true;
 	};
 
