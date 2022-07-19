@@ -1,6 +1,8 @@
 #include "mpch.hpp"
-#include "WindowsWindow.hpp"
 
+#include <glad/glad.h>
+
+#include "WindowsWindow.hpp"
 #include "Mawar/Events/ApplicationEvent.hpp"
 #include "Mawar/Events/KeyEvent.hpp"
 #include "Mawar/Events/MouseEvent.hpp"
@@ -73,6 +75,9 @@ namespace Mawar
 
 		glfwMakeContextCurrent(m_Window);
 		M_CORE_TRACE("Make Context");
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		M_CORE_TRACE("Initialized Glad");
+		M_CORE_ASSERT(status, "Couldn't initialize Glad.");
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		M_CORE_TRACE("Set Window User Pointer");
 		SetVSync(true);
