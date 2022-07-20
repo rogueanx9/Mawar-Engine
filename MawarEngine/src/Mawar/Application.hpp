@@ -20,11 +20,17 @@ namespace Mawar
 		void PushLayer(Layer* layer);
 		void PushOverlay (Layer* layer);
 
+		inline static Application& Get() { return *s_Instance; }
+		inline Window& GetWindow() { return *m_Window; }
+
 	private:
 		std::unique_ptr<Window> m_Window;
 		LayerStack m_LayerStack;
 		bool OnWindowClosed(WindowCloseEvent&);
 		bool m_Running = true;
+
+	private:
+		static Application* s_Instance;
 	};
 
 	// To be defined on client

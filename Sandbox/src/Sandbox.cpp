@@ -22,6 +22,7 @@ public:
 	Sandbox()
 	{
 		PushLayer(new LayerExample());
+		PushOverlay(new Mawar::ImGuiLayer());
 	}
 	~Sandbox(){}
 };

@@ -33,7 +33,7 @@ namespace Mawar
 
 #define EVENT_CLASS_CATEGORY(category) int GetCategoryFlags() const override { return category; }
 
-	class Event // Interface
+	class M_API Event // Interface
 	{
 	public:
 		bool Handled = false;

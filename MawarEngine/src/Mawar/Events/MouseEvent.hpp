@@ -48,7 +48,7 @@ namespace Mawar
 		float m_OffsetX, m_OffsetY;
 	};
 
-	class MouseButtonEvent : public Event
+	class M_API MouseButtonEvent : public Event
 	{
 	public:
 		int GetMouseButton() const { return m_MouseButton; }

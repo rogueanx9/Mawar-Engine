@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>mpch.hpp</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>M_PLATFORM_W10;M_BUILD_DLL;M_ENABLE_ASSERT;M_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -104,7 +104,7 @@ copy /B /Y ..\bin\Debug-windows-x86_64\MawarEngine\MawarEngine.dll ..\bin\Debug-
       <PrecompiledHeaderFile>mpch.hpp</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>M_PLATFORM_W10;M_BUILD_DLL;M_ENABLE_ASSERT;M_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -132,7 +132,7 @@ copy /B /Y ..\bin\Release-windows-x86_64\MawarEngine\MawarEngine.dll ..\bin\Rele
       <PrecompiledHeaderFile>mpch.hpp</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>M_PLATFORM_W10;M_BUILD_DLL;M_ENABLE_ASSERT;M_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -162,20 +162,24 @@ copy /B /Y ..\bin\Dist-windows-x86_64\MawarEngine\MawarEngine.dll ..\bin\Dist-wi
     <ClInclude Include="src\Mawar\Events\Event.hpp" />
     <ClInclude Include="src\Mawar\Events\KeyEvent.hpp" />
     <ClInclude Include="src\Mawar\Events\MouseEvent.hpp" />
+    <ClInclude Include="src\Mawar\ImGui\ImGuiLayer.hpp" />
     <ClInclude Include="src\Mawar\Layer.hpp" />
     <ClInclude Include="src\Mawar\LayerStack.hpp" />
     <ClInclude Include="src\Mawar\Log.hpp" />
     <ClInclude Include="src\Mawar\Window.hpp" />
     <ClInclude Include="src\MawarEngine.hpp" />
-    <ClInclude Include="src\Platform\Windows\WindowsWindow.hpp" />
+    <ClInclude Include="src\Mawar\Platform\OpenGL\imgui_impl_opengl3.h" />
+    <ClInclude Include="src\Mawar\Platform\Windows\WindowsWindow.hpp" />
     <ClInclude Include="src\mpch.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Mawar\Application.cpp" />
+    <ClCompile Include="src\Mawar\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Mawar\Layer.cpp" />
     <ClCompile Include="src\Mawar\LayerStack.cpp" />
     <ClCompile Include="src\Mawar\Log.cpp" />
-    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="src\Mawar\Platform\OpenGL\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\Mawar\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\mpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
@@ -186,6 +190,9 @@ copy /B /Y ..\bin\Dist-windows-x86_64\MawarEngine\MawarEngine.dll ..\bin\Dist-wi
     </ProjectReference>
     <ProjectReference Include="vendor\Glad\Glad.vcxproj">
       <Project>{BDD6857C-A90D-870D-52FA-6C103E10030F}</Project>
+    </ProjectReference>
+    <ProjectReference Include="vendor\imgui\ImGui.vcxproj">
+      <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -49,10 +49,12 @@
       <Filter>Mawar</Filter>
     </ClInclude>
     <ClInclude Include="src\MawarEngine.hpp" />
-    <ClInclude Include="src\Platform\Windows\WindowsWindow.hpp">
+    <ClInclude Include="src\Mawar\Platform\Windows\WindowsWindow.hpp">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\mpch.hpp" />
+    <ClInclude Include="src\Mawar\ImGui\ImGuiLayer.hpp" />
+    <ClInclude Include="src\Mawar\Platform\OpenGL\imgui_impl_opengl3.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Mawar\Application.cpp">
@@ -67,9 +69,11 @@
     <ClCompile Include="src\Mawar\Log.cpp">
       <Filter>Mawar</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+    <ClCompile Include="src\Mawar\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\mpch.cpp" />
+    <ClCompile Include="src\Mawar\ImGui\ImGuiLayer.cpp" />
+    <ClCompile Include="src\Mawar\Platform\OpenGL\imgui_impl_opengl3.cpp" />
   </ItemGroup>
 </Project>

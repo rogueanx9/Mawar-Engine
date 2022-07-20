@@ -4,7 +4,7 @@
 
 namespace Mawar
 {
-	class KeyEvent : public Event
+	class M_API KeyEvent : public Event
 	{
 	public:
 		int GetKeyCode() const { return m_KeyCode; }
