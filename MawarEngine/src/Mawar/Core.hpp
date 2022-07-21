@@ -19,3 +19,5 @@
 	#define M_ASSERT(x, ...)
 	#define M_CORE_ASSERT(x, ...)
 #endif
+
+#define M_BIND_FN(fn) std::bind(&fn, this, std::placeholders::_1)

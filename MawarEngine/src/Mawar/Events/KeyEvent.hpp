@@ -51,4 +51,19 @@ namespace Mawar
 
 		EVENT_CLASS_TYPE(KeyReleased);
 	};
+
+	class M_API KeyTypedEvent : public KeyEvent
+	{
+	public:
+		KeyTypedEvent(int keycode) : KeyEvent(keycode) {}
+
+		std::string ToString() const
+		{
+			std::stringstream ss;
+			ss << "KeyTypedEvent: " << m_KeyCode;
+			return ss.str();
+		}
+
+		EVENT_CLASS_TYPE(KeyTyped);
+	};
 }
