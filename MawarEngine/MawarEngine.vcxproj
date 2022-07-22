@@ -84,7 +84,6 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -94,8 +93,7 @@
       <ImportLibrary>..\bin\Debug-windows-x86_64\MawarEngine\MawarEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF NOT EXIST ..\bin\Debug-windows-x86_64\Sandbox (mkdir ..\bin\Debug-windows-x86_64\Sandbox)
-copy /B /Y ..\bin\Debug-windows-x86_64\MawarEngine\MawarEngine.dll ..\bin\Debug-windows-x86_64\Sandbox</Command>
+      <Command>IF EXIST ..\bin\Debug-windows-x86_64\MawarEngine\MawarEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\MawarEngine\MawarEngine.dll "..\bin\Debug-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\MawarEngine\MawarEngine.dll "..\bin\Debug-windows-x86_64\Sandbox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -111,7 +109,6 @@ copy /B /Y ..\bin\Debug-windows-x86_64\MawarEngine\MawarEngine.dll ..\bin\Debug-
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -122,8 +119,7 @@ copy /B /Y ..\bin\Debug-windows-x86_64\MawarEngine\MawarEngine.dll ..\bin\Debug-
       <ImportLibrary>..\bin\Release-windows-x86_64\MawarEngine\MawarEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF NOT EXIST ..\bin\Release-windows-x86_64\Sandbox (mkdir ..\bin\Release-windows-x86_64\Sandbox)
-copy /B /Y ..\bin\Release-windows-x86_64\MawarEngine\MawarEngine.dll ..\bin\Release-windows-x86_64\Sandbox</Command>
+      <Command>IF EXIST ..\bin\Release-windows-x86_64\MawarEngine\MawarEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\MawarEngine\MawarEngine.dll "..\bin\Release-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\MawarEngine\MawarEngine.dll "..\bin\Release-windows-x86_64\Sandbox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
@@ -138,8 +134,7 @@ copy /B /Y ..\bin\Release-windows-x86_64\MawarEngine\MawarEngine.dll ..\bin\Rele
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -150,8 +145,7 @@ copy /B /Y ..\bin\Release-windows-x86_64\MawarEngine\MawarEngine.dll ..\bin\Rele
       <ImportLibrary>..\bin\Dist-windows-x86_64\MawarEngine\MawarEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF NOT EXIST ..\bin\Dist-windows-x86_64\Sandbox (mkdir ..\bin\Dist-windows-x86_64\Sandbox)
-copy /B /Y ..\bin\Dist-windows-x86_64\MawarEngine\MawarEngine.dll ..\bin\Dist-windows-x86_64\Sandbox</Command>
+      <Command>IF EXIST ..\bin\Dist-windows-x86_64\MawarEngine\MawarEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\MawarEngine\MawarEngine.dll "..\bin\Dist-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\MawarEngine\MawarEngine.dll "..\bin\Dist-windows-x86_64\Sandbox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -166,10 +160,9 @@ copy /B /Y ..\bin\Dist-windows-x86_64\MawarEngine\MawarEngine.dll ..\bin\Dist-wi
     <ClInclude Include="src\Mawar\Layer.hpp" />
     <ClInclude Include="src\Mawar\LayerStack.hpp" />
     <ClInclude Include="src\Mawar\Log.hpp" />
+    <ClInclude Include="src\Mawar\Platform\Windows\WindowsWindow.hpp" />
     <ClInclude Include="src\Mawar\Window.hpp" />
     <ClInclude Include="src\MawarEngine.hpp" />
-    <ClInclude Include="src\Mawar\Platform\OpenGL\imgui_impl_opengl3.h" />
-    <ClInclude Include="src\Mawar\Platform\Windows\WindowsWindow.hpp" />
     <ClInclude Include="src\mpch.hpp" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,7 @@
 workspace "MawarEngine"
     architecture "x64"
+	startproject "Sandbox"
+
     configurations
     {
         "Debug",
@@ -23,6 +25,7 @@ project "MawarEngine"
 	location "MawarEngine"
 	kind "SharedLib"
 	language "C++"
+	staticruntime "off"
 	
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -55,7 +58,6 @@ project "MawarEngine"
 	
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 		
 		defines
@@ -67,26 +69,21 @@ project "MawarEngine"
 		
 		postbuildcommands
 		{
-			"{MKDIR} ../bin/" .. outputdir .. "/Sandbox/",
-			"{COPYFILE} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox/"
+			"{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\""
 		}
 
 	filter "configurations:Debug"
-		staticruntime "Off"
 		runtime "Debug"
-		buildoptions "/MDd"
 		defines "M_DEBUG"
 		symbols "On"
 		
 	filter "configurations:Release"
-		staticruntime "Off"
 		runtime "Release"
-		buildoptions "/MD"
 		defines "M_RELEASE"
 		optimize "On"
 		
 	filter "configurations:Dist"
-		buildoptions "/MD"
+		runtime "Release"
 		defines "M_DIST"
 		optimize "On"
 		
@@ -94,6 +91,7 @@ project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "off"
 	
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -117,7 +115,6 @@ project "Sandbox"
 	
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 		
 		defines
@@ -127,15 +124,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "M_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 		
 	filter "configurations:Release"
 		defines "M_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 		
 	filter "configurations:Dist"
 		defines "M_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
