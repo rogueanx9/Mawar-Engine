@@ -157,9 +157,11 @@
     <ClInclude Include="src\Mawar\Events\KeyEvent.hpp" />
     <ClInclude Include="src\Mawar\Events\MouseEvent.hpp" />
     <ClInclude Include="src\Mawar\ImGui\ImGuiLayer.hpp" />
+    <ClInclude Include="src\Mawar\Input.hpp" />
     <ClInclude Include="src\Mawar\Layer.hpp" />
     <ClInclude Include="src\Mawar\LayerStack.hpp" />
     <ClInclude Include="src\Mawar\Log.hpp" />
+    <ClInclude Include="src\Mawar\Platform\Windows\WindowsInput.hpp" />
     <ClInclude Include="src\Mawar\Platform\Windows\WindowsWindow.hpp" />
     <ClInclude Include="src\Mawar\Window.hpp" />
     <ClInclude Include="src\MawarEngine.hpp" />
@@ -172,6 +174,7 @@
     <ClCompile Include="src\Mawar\LayerStack.cpp" />
     <ClCompile Include="src\Mawar\Log.cpp" />
     <ClCompile Include="src\Mawar\Platform\OpenGL\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\Mawar\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Mawar\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\mpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

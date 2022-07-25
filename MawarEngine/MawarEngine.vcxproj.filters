@@ -62,6 +62,8 @@
     </ClInclude>
     <ClInclude Include="src\MawarEngine.hpp" />
     <ClInclude Include="src\mpch.hpp" />
+    <ClInclude Include="src\Mawar\Input.hpp" />
+    <ClInclude Include="src\Mawar\Platform\Windows\WindowsInput.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Mawar\Application.cpp">
@@ -86,5 +88,6 @@
       <Filter>Mawar\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\mpch.cpp" />
+    <ClCompile Include="src\Mawar\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
 </Project>

@@ -21,6 +21,8 @@ namespace Mawar
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;
 
+		void* GetNativeWindow() const override { return m_Window; }
+
 	private:
 		void Init(const WindowProps& props);
 		void Shutdown();

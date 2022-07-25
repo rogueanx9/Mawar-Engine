@@ -1,9 +1,10 @@
 #include "mpch.hpp"
 #include "Application.hpp"
 
-#include "Events/KeyEvent.hpp"
-#include "Events/MouseEvent.hpp"
-#include "Log.hpp"
+#include "Mawar/Events/KeyEvent.hpp"
+#include "Mawar/Events/MouseEvent.hpp"
+#include "Mawar/Log.hpp"
+#include "Mawar/Input.hpp"
 
 #include <GLFW/glfw3.h>
 
@@ -46,6 +47,8 @@ namespace Mawar
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
+
+			M_CORE_TRACE("Mouse Position: {0}, {1}", Input::GetMouseX(), Input::GetMouseY());
 
 			// Main Window Update
 			m_Window->OnUpdate();
