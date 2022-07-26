@@ -7,3 +7,6 @@
 [submodule "MawarEngine/vendor/imgui"]
 	path = MawarEngine/vendor/imgui
 	url = https://github.com/rogueanx9/imgui.git
+[submodule "MawarEngine/vendor/glm"]
+	path = MawarEngine/vendor/glm
+	url = https://github.com/g-truc/glm.git
