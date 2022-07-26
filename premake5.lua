@@ -16,6 +16,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "MawarEngine/vendor/GLFW/include"
 IncludeDir["Glad"] = "MawarEngine/vendor/Glad/include"
 IncludeDir["ImGui"] = "MawarEngine/vendor/imgui"
+IncludeDir["glm"] = "MawarEngine/vendor/glm"
 
 include "MawarEngine/vendor/GLFW"
 include "MawarEngine/vendor/Glad"
@@ -37,6 +38,8 @@ project "MawarEngine"
 	{
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/src/**.hpp",
+		"%{prj.name}/vendor/glm/**.hpp",
+		"%{prj.name}/vendor/glm/**.inl"
 	}
 	
 	includedirs
@@ -45,7 +48,8 @@ project "MawarEngine"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 	
 	links
@@ -105,7 +109,8 @@ project "Sandbox"
 	includedirs
 	{
 		"MawarEngine/vendor/spdlog/include",
-		"MawarEngine/src"
+		"MawarEngine/src",
+		"%{IncludeDir.glm}"
 	}
 	
 	links
