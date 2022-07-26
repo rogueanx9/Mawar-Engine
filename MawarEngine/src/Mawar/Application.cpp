@@ -48,7 +48,7 @@ namespace Mawar
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
 
-			M_CORE_TRACE("Mouse Position: {0}, {1}", Input::GetMouseX(), Input::GetMouseY());
+			//M_CORE_TRACE("Mouse Position: {0}, {1}", Input::GetMouseX(), Input::GetMouseY());
 
 			// Main Window Update
 			m_Window->OnUpdate();

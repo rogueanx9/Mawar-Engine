@@ -64,6 +64,8 @@
     <ClInclude Include="src\mpch.hpp" />
     <ClInclude Include="src\Mawar\Input.hpp" />
     <ClInclude Include="src\Mawar\Platform\Windows\WindowsInput.hpp" />
+    <ClInclude Include="src\Mawar\KeyCodes.hpp" />
+    <ClInclude Include="src\Mawar\MouseButtonCodes.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Mawar\Application.cpp">

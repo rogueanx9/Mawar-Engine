@@ -12,7 +12,13 @@ public:
 
 	void OnEvent(Mawar::Event& e) override
 	{
-		M_TRACE("{0}", e);
+		if (e.GetEventType() == Mawar::EventType::KeyPressed)
+		{
+			Mawar::KeyPressedEvent& event = (Mawar::KeyPressedEvent&)e;
+			M_TRACE("{0} is pressed.", (char)event.GetKeyCode());
+		}
+		else
+			M_TRACE("{0}", e);
 	}
 };
 
