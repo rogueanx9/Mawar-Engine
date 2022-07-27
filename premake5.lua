@@ -110,7 +110,8 @@ project "Sandbox"
 	{
 		"MawarEngine/vendor/spdlog/include",
 		"MawarEngine/src",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.ImGui}"
 	}
 	
 	links

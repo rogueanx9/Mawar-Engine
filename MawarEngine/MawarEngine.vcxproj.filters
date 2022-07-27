@@ -16,9 +16,6 @@
     <Filter Include="src\Mawar\Platform">
       <UniqueIdentifier>{08FC4101-F4DF-0257-5D40-FDA94943EDD8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Mawar\Platform\OpenGL">
-      <UniqueIdentifier>{3CCC1900-A88E-4D8A-F13E-DC165D402668}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Mawar\Platform\Windows">
       <UniqueIdentifier>{422E6F5B-2E3E-1B2C-97F7-7F4A83260AC5}</UniqueIdentifier>
     </Filter>
@@ -1352,6 +1349,9 @@
     <ClCompile Include="src\Mawar\Application.cpp">
       <Filter>src\Mawar</Filter>
     </ClCompile>
+    <ClCompile Include="src\Mawar\ImGui\ImGuiBuild.cpp">
+      <Filter>src\Mawar\ImGui</Filter>
+    </ClCompile>
     <ClCompile Include="src\Mawar\ImGui\ImGuiLayer.cpp">
       <Filter>src\Mawar\ImGui</Filter>
     </ClCompile>
@@ -1373,6 +1373,5 @@
     <ClCompile Include="src\mpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Mawar\ImGui\ImGuiBuild.cpp" />
   </ItemGroup>
 </Project>
