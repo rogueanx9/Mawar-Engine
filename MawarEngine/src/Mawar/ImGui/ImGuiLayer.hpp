@@ -17,8 +17,10 @@ namespace Mawar
 
 		void OnAttach() override;
 		void OnDetach() override;
-		void OnUpdate() override;
-		void OnImGuiRender();
+		void OnImGuiRender() override;
+
+		void Begin();
+		void End();
 
 	private:
 		bool m_show_demo_window = true;
