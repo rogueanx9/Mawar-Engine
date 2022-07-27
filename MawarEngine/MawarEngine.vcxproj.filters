@@ -1364,9 +1364,6 @@
     <ClCompile Include="src\Mawar\Log.cpp">
       <Filter>src\Mawar</Filter>
     </ClCompile>
-    <ClCompile Include="src\Mawar\Platform\OpenGL\imgui_impl_opengl3.cpp">
-      <Filter>src\Mawar\Platform\OpenGL</Filter>
-    </ClCompile>
     <ClCompile Include="src\Mawar\Platform\Windows\WindowsInput.cpp">
       <Filter>src\Mawar\Platform\Windows</Filter>
     </ClCompile>
@@ -1376,5 +1373,6 @@
     <ClCompile Include="src\mpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Mawar\ImGui\ImGuiBuild.cpp" />
   </ItemGroup>
 </Project>
