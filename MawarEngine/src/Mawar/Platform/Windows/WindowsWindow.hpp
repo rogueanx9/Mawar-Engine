@@ -33,8 +33,8 @@ namespace Mawar
 		struct WindowData
 		{
 			std::string Title;
-			unsigned int Width = 0.0f;
-			unsigned int Height = 0.0f;
+			unsigned int Width = 0;
+			unsigned int Height = 0;
 			bool Vsync;
 			EventCallbackFn Callback;
 		};

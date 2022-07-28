@@ -13,6 +13,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include Dirs array
 IncludeDir = {}
+IncludeDir["spdlog"] = "MawarEngine/vendor/spdlog/include"
 IncludeDir["GLFW"] = "MawarEngine/vendor/GLFW/include"
 IncludeDir["Glad"] = "MawarEngine/vendor/Glad/include"
 IncludeDir["ImGui"] = "MawarEngine/vendor/imgui"
@@ -24,9 +25,10 @@ include "MawarEngine/vendor/imgui"
 
 project "MawarEngine"
 	location "MawarEngine"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
-	staticruntime "off"
+	staticruntime "on"
+	cppdialect "C++17"
 	
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -41,11 +43,16 @@ project "MawarEngine"
 		"%{prj.name}/vendor/glm/**.hpp",
 		"%{prj.name}/vendor/glm/**.inl"
 	}
+
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
+	}
 	
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
@@ -61,41 +68,35 @@ project "MawarEngine"
 	}
 	
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 		
 		defines
 		{
 			"M_PLATFORM_W10",
-			"M_BUILD_DLL",
 			"M_ENABLE_ASSERT"
-		}
-		
-		postbuildcommands
-		{
-			"{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\""
 		}
 
 	filter "configurations:Debug"
 		runtime "Debug"
 		defines "M_DEBUG"
-		symbols "On"
+		symbols "on"
 		
 	filter "configurations:Release"
 		runtime "Release"
 		defines "M_RELEASE"
-		optimize "On"
+		optimize "on"
 		
 	filter "configurations:Dist"
 		runtime "Release"
 		defines "M_DIST"
-		optimize "On"
+		optimize "on"
 		
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 	
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -108,7 +109,7 @@ project "Sandbox"
 	
 	includedirs
 	{
-		"MawarEngine/vendor/spdlog/include",
+		"%{IncludeDir.spdlog}",
 		"MawarEngine/src",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.ImGui}"
@@ -120,7 +121,6 @@ project "Sandbox"
 	}
 	
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 		
 		defines
@@ -131,14 +131,14 @@ project "Sandbox"
 	filter "configurations:Debug"
 		defines "M_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 		
 	filter "configurations:Release"
 		defines "M_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 		
 	filter "configurations:Dist"
 		defines "M_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"

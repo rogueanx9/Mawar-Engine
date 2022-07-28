@@ -1,11 +1,15 @@
 #pragma once
 
 #ifdef M_PLATFORM_W10
+#ifdef M_DYNAMIC_LINK
 	#ifdef M_BUILD_DLL
 		#define M_API __declspec(dllexport)
 	#else
 		#define M_API __declspec(dllimport)
 	#endif
+#else
+	#define M_API
+#endif
 #else
 	#error Windows only!
 #endif
