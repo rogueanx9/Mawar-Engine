@@ -1,11 +1,10 @@
 #include "mpch.hpp"
 
-#include <glad/glad.h>
-
 #include "WindowsWindow.hpp"
 #include "Mawar/Events/ApplicationEvent.hpp"
 #include "Mawar/Events/KeyEvent.hpp"
 #include "Mawar/Events/MouseEvent.hpp"
+#include "Mawar/Platform/OpenGL/OpenGLContext.hpp"
 
 namespace Mawar
 {
@@ -34,7 +33,7 @@ namespace Mawar
 	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+		m_Context->SwapBuffers();
 	}
 
 	void WindowsWindow::SetVSync(bool enabled)
@@ -73,11 +72,10 @@ namespace Mawar
 		M_CORE_TRACE("Window Created");
 		M_CORE_ASSERT(m_Window, "Couldn't create window.");
 
-		glfwMakeContextCurrent(m_Window);
-		M_CORE_TRACE("Make Context");
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		M_CORE_TRACE("Initialized Glad");
-		M_CORE_ASSERT(status, "Couldn't initialize Glad.");
+		m_Context = new OpenGLContext(m_Window);
+		M_CORE_TRACE("Context Created");
+
+		m_Context->Init();
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		M_CORE_TRACE("Set Window User Pointer");
 		SetVSync(true);

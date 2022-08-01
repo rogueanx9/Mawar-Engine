@@ -1344,6 +1344,8 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
+    <ClInclude Include="src\Mawar\Renderer\GraphicContext.hpp" />
+    <ClInclude Include="src\Mawar\Platform\OpenGL\OpenGLContext.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Mawar\Application.cpp">
@@ -1373,5 +1375,6 @@
     <ClCompile Include="src\mpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Mawar\Platform\OpenGL\OpenGLContext.cpp" />
   </ItemGroup>
 </Project>

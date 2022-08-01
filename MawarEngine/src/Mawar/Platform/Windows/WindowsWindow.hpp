@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Mawar/Window.hpp"
+#include "Mawar/Renderer/GraphicContext.hpp"
+
 #include <GLFW/glfw3.h>
 
 namespace Mawar
@@ -29,6 +31,7 @@ namespace Mawar
 
 	private:
 		GLFWwindow* m_Window = nullptr;
+		GraphicContext* m_Context;
 
 		struct WindowData
 		{
