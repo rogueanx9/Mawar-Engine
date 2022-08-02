@@ -19,6 +19,11 @@ namespace Mawar
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		M_CORE_TRACE("Initialized Glad");
 		M_CORE_ASSERT(status, "Couldn't initialize Glad.");
+
+		M_CORE_INFO("OpenGL Info:");
+		M_CORE_INFO("  Vendor: {0}", glGetString(GL_VENDOR));
+		M_CORE_INFO("  Renderer: {0}", glGetString(GL_RENDERER));
+		M_CORE_INFO("  Version: {0}", glGetString(GL_VERSION));
 	}
 	void OpenGLContext::SwapBuffers()
 	{

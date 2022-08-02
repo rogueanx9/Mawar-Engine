@@ -7,6 +7,11 @@
 #include "Mawar/Events/KeyEvent.hpp"
 #include "Mawar/Events/MouseEvent.hpp"
 
+struct IMGUIClearColor
+{
+	float x, y, z, w;
+};
+
 namespace Mawar
 {
 	class M_API ImGuiLayer : public Layer
@@ -21,6 +26,8 @@ namespace Mawar
 
 		void Begin();
 		void End();
+
+		IMGUIClearColor GetClearColor();
 
 	private:
 		bool m_show_demo_window = true;
