@@ -158,6 +158,7 @@
     <ClInclude Include="src\Mawar\Platform\Windows\WindowsInput.hpp" />
     <ClInclude Include="src\Mawar\Platform\Windows\WindowsWindow.hpp" />
     <ClInclude Include="src\Mawar\Renderer\GraphicContext.hpp" />
+    <ClInclude Include="src\Mawar\Renderer\Shader.hpp" />
     <ClInclude Include="src\Mawar\Window.hpp" />
     <ClInclude Include="src\MawarEngine.hpp" />
     <ClInclude Include="src\mpch.hpp" />
@@ -587,6 +588,7 @@
     <ClCompile Include="src\Mawar\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Mawar\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Mawar\Platform\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="src\Mawar\Renderer\Shader.cpp" />
     <ClCompile Include="src\mpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

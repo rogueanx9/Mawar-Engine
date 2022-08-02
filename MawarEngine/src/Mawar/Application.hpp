@@ -6,6 +6,7 @@
 #include "Mawar/Window.hpp"
 #include "Mawar/LayerStack.hpp"
 #include "Mawar/ImGui/ImGuiLayer.hpp"
+#include "Mawar/Renderer/Shader.hpp"
 
 namespace Mawar
 {
@@ -25,6 +26,7 @@ namespace Mawar
 		inline Window& GetWindow() { return *m_Window; }
 
 	private:
+		std::unique_ptr<Shader> m_Shader;
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		LayerStack m_LayerStack;
