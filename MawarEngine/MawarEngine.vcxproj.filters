@@ -1347,6 +1347,9 @@
     <ClInclude Include="src\Mawar\Renderer\GraphicContext.hpp" />
     <ClInclude Include="src\Mawar\Platform\OpenGL\OpenGLContext.hpp" />
     <ClInclude Include="src\Mawar\Renderer\Shader.hpp" />
+    <ClInclude Include="src\Mawar\Renderer\Buffer.hpp" />
+    <ClInclude Include="src\Mawar\Platform\OpenGL\OpenGLBuffer.hpp" />
+    <ClInclude Include="src\Mawar\Renderer\Renderer.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Mawar\Application.cpp">
@@ -1378,5 +1381,8 @@
     </ClCompile>
     <ClCompile Include="src\Mawar\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Mawar\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Mawar\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Mawar\Platform\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="src\Mawar\Renderer\Renderer.cpp" />
   </ItemGroup>
 </Project>
