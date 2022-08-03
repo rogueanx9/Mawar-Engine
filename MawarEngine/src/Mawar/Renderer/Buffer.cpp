@@ -32,5 +32,22 @@ namespace Mawar
 		return nullptr;
 	}
 
+	BufferLayout::BufferLayout(const std::initializer_list<BufferElement>& elements)
+		: m_Elements(elements)
+	{
+		CalculateOffsetAndStride();
+	}
 
+	void BufferLayout::CalculateOffsetAndStride()
+	{
+		uint32_t offset = 0;
+		m_Stride = 0;
+
+		for (auto& element : m_Elements)
+		{
+			element.offset = offset;
+			offset += element.size;
+			m_Stride += element.size;
+		}
+	}
 }
