@@ -13,33 +13,13 @@ namespace Mawar
 {
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
-	// Hackkkk
-	static GLenum ToOpenGLType(const ShaderDataType& type)
-	{
-		switch (type)
-		{
-		case ShaderDataType::None:          return GL_FALSE;
-		case ShaderDataType::Float:         return GL_FLOAT;
-		case ShaderDataType::Float2:        return GL_FLOAT;
-		case ShaderDataType::Float3:        return GL_FLOAT;
-		case ShaderDataType::Float4:        return GL_FLOAT;
-		case ShaderDataType::Int:           return GL_INT;
-		case ShaderDataType::Int2:          return GL_INT;
-		case ShaderDataType::Int3:          return GL_INT;
-		case ShaderDataType::Int4:          return GL_INT;
-		case ShaderDataType::Mat3:          return GL_FLOAT;
-		case ShaderDataType::Mat4:          return GL_FLOAT;
-		case ShaderDataType::Bool:          return GL_BOOL;
-		}
-
-		M_CORE_ASSERT(false, "Unknown ShaderDataType!");
-		return GL_FALSE;
-	}
-
 	Application* Application::s_Instance = nullptr;
 
 	Application::Application()
 	{
+		/// <summary>
+		/// Initialization
+		/// </summary>
 		M_CORE_ASSERT(!s_Instance, "Application already running.");
 		s_Instance = this;
 
@@ -49,41 +29,56 @@ namespace Mawar
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
-		glGenVertexArrays(1, &m_VertexArray);
-		glBindVertexArray(m_VertexArray);
+		/// <summary>
+		/// OpenGL Rendering Object
+		/// </summary>
+		m_VertexArray.reset(VertexArray::Create());
+		m_SquareVertexArray.reset(VertexArray::Create());
 
+		/// <summary>
+		/// Triangle
+		/// </summary>
 		float vertices[3 * 7] =
 		{
 			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
 			 0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
 			 0.0f,  0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f
 		};
-		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+		std::shared_ptr<VertexBuffer> triangleVB;
+		triangleVB.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+		triangleVB->SetLayout({
+			{ShaderDataType::Float3, "a_Position"},
+			{ShaderDataType::Float4, "a_Color"}
+		});
+		m_VertexArray->AddVertexBuffer(triangleVB);
 
-		{
-			BufferLayout layout = {
-				{ShaderDataType::Float3, "a_Position"},
-				{ShaderDataType::Float4, "a_Color"},
-			};
-			m_VertexBuffer->SetLayout(layout);
-		}
+		unsigned int indices[3] = { 0,1,2 };
+		std::shared_ptr<IndexBuffer> triangleIB;
+		triangleIB.reset(IndexBuffer::Create(indices, 3));
+		m_VertexArray->SetIndexBuffer(triangleIB);
 
-		uint32_t index = 0;
-		const auto& layout = m_VertexBuffer->GetLayout();
-		for (auto& element : layout)
+		/// <summary>
+		/// Square
+		/// </summary>
+		float squareVertices[4 * 7] =
 		{
-			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index, element.Count(), ToOpenGLType(element.type), 
-				                  element.normalize ? GL_TRUE : GL_FALSE, 
-				                  layout.GetStride(), (const void*)element.offset);
-			index++;
-		}
-
-		unsigned int indices[3] =
-		{
-			0, 1, 2
+			-0.75f, -0.75f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
+			 0.75f, -0.75f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f,
+			 0.75f,  0.75f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
+			-0.75f,  0.75f, 0.0f, 0.8f, 0.2f, 0.3f, 1.0f,
 		};
-		m_IndexBuffer.reset(IndexBuffer::Create(indices, 3));
+		std::shared_ptr<VertexBuffer> squareVB;
+		squareVB.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		squareVB->SetLayout({
+			{ShaderDataType::Float3, "a_Position"},
+			{ShaderDataType::Float4, "a_Color"}
+			});
+		m_SquareVertexArray->AddVertexBuffer(squareVB);
+
+		unsigned int squareIndices[] = { 0,1,2,2,3,0 };
+		std::shared_ptr<IndexBuffer> squareIB;
+		squareIB.reset(IndexBuffer::Create(squareIndices, 6));
+		m_SquareVertexArray->SetIndexBuffer(squareIB);
 
 		std::string vertexSource = R"(
              #version 330 core
@@ -144,8 +139,12 @@ namespace Mawar
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			m_Shader->Bind();
-			glBindVertexArray(m_VertexArray);
-			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+
+			m_SquareVertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, m_SquareVertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+
+			m_VertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
@@ -154,8 +153,6 @@ namespace Mawar
 			for (Layer* layer : m_LayerStack)
 				layer->OnImGuiRender();
 			m_ImGuiLayer->End();
-
-			//M_CORE_TRACE("Mouse Position: {0}, {1}", Input::GetMouseX(), Input::GetMouseY());
 
 			// Main Window Update
 			m_Window->OnUpdate();

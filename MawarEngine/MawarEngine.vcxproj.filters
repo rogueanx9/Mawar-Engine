@@ -1350,6 +1350,8 @@
     <ClInclude Include="src\Mawar\Renderer\Buffer.hpp" />
     <ClInclude Include="src\Mawar\Platform\OpenGL\OpenGLBuffer.hpp" />
     <ClInclude Include="src\Mawar\Renderer\Renderer.hpp" />
+    <ClInclude Include="src\Mawar\Renderer\VertexArray.hpp" />
+    <ClInclude Include="src\Mawar\Platform\OpenGL\OpenGLVertexArray.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Mawar\Application.cpp">
@@ -1384,5 +1386,7 @@
     <ClCompile Include="src\Mawar\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Mawar\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Mawar\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\Mawar\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\Mawar\Platform\OpenGL\OpenGLVertexArray.cpp" />
   </ItemGroup>
 </Project>

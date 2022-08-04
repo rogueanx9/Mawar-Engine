@@ -12,8 +12,8 @@ namespace Mawar
 		unsigned int Width, Height;
 
 		WindowProps(const std::string title = "Mawar Engine",
-			        unsigned int width = 1280,
-			        unsigned int height = 720)
+			        unsigned int width = 800,
+			        unsigned int height = 600)
 			: Title(title), Width(width), Height(height) {}
 	};
 

@@ -8,6 +8,7 @@
 #include "Mawar/ImGui/ImGuiLayer.hpp"
 #include "Mawar/Renderer/Shader.hpp"
 #include "Mawar/Renderer/Buffer.hpp"
+#include "Mawar/Renderer/VertexArray.hpp"
 
 namespace Mawar
 {
@@ -35,9 +36,8 @@ namespace Mawar
 		bool OnWindowClosed(WindowCloseEvent&);
 		bool m_Running = true;
 
-		unsigned int m_VertexArray;
-		std::unique_ptr<VertexBuffer> m_VertexBuffer;
-		std::unique_ptr<IndexBuffer> m_IndexBuffer;
+		std::shared_ptr<VertexArray> m_VertexArray;
+		std::shared_ptr<VertexArray> m_SquareVertexArray;
 
 	private:
 		static Application* s_Instance;
