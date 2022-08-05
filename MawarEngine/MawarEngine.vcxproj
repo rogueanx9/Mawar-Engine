@@ -140,6 +140,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Mawar\Platform\OpenGL\OpenGLRendererAPI.hpp" />
     <ClInclude Include="src\Mawar\Application.hpp" />
     <ClInclude Include="src\Mawar\Core.hpp" />
     <ClInclude Include="src\Mawar\EntryPoint.hpp" />
@@ -161,7 +162,9 @@
     <ClInclude Include="src\Mawar\Platform\Windows\WindowsWindow.hpp" />
     <ClInclude Include="src\Mawar\Renderer\Buffer.hpp" />
     <ClInclude Include="src\Mawar\Renderer\GraphicContext.hpp" />
+    <ClInclude Include="src\Mawar\Renderer\RenderCommand.hpp" />
     <ClInclude Include="src\Mawar\Renderer\Renderer.hpp" />
+    <ClInclude Include="src\Mawar\Renderer\RendererAPI.hpp" />
     <ClInclude Include="src\Mawar\Renderer\Shader.hpp" />
     <ClInclude Include="src\Mawar\Renderer\VertexArray.hpp" />
     <ClInclude Include="src\Mawar\Window.hpp" />
@@ -584,6 +587,7 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Mawar\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Mawar\Application.cpp" />
     <ClCompile Include="src\Mawar\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Mawar\ImGui\ImGuiLayer.cpp" />
@@ -596,7 +600,9 @@
     <ClCompile Include="src\Mawar\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Mawar\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Mawar\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Mawar\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Mawar\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\Mawar\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Mawar\Renderer\Shader.cpp" />
     <ClCompile Include="src\Mawar\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\mpch.cpp">

@@ -1,13 +1,8 @@
 #include "mpch.hpp"
 #include "Application.hpp"
 
-#include "Mawar/Events/KeyEvent.hpp"
-#include "Mawar/Events/MouseEvent.hpp"
 #include "Mawar/Log.hpp"
-#include "Mawar/Input.hpp"
-
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include "Mawar/Renderer/Renderer.hpp"
 
 namespace Mawar
 {
@@ -135,16 +130,16 @@ namespace Mawar
 		while (m_Running)
 		{
 			IMGUIClearColor clear_color = m_ImGuiLayer->GetClearColor();
-			glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
-			glClear(GL_COLOR_BUFFER_BIT);
+
+			RenderCommand::SetClearColor({ clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w });
+			RenderCommand::Clear();
 
 			m_Shader->Bind();
 
-			m_SquareVertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_SquareVertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
-
-			m_VertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::BeginScene();
+			Renderer::Submit(m_SquareVertexArray);
+			Renderer::Submit(m_VertexArray);
+			Renderer::EndScene();
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();

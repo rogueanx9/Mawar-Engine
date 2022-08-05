@@ -12,8 +12,8 @@ namespace Mawar
 	{
 		switch (Renderer::GetAPI())
 		{
-			case RendererAPI::None: M_CORE_ASSERT(false, "RendererAPI::None is not supported!"); return nullptr;
-			case RendererAPI::OpenGL: return new OpenGLVertexBuffer(vertices, size);
+			case RendererAPI::API::None: M_CORE_ASSERT(false, "RendererAPI::None is not supported!"); return nullptr;
+			case RendererAPI::API::OpenGL: return new OpenGLVertexBuffer(vertices, size);
 		}
 
 		M_CORE_ASSERT(false, "Unknown Renderer API.");
@@ -24,8 +24,8 @@ namespace Mawar
 	{
 		switch (Renderer::GetAPI())
 		{
-			case RendererAPI::None: M_CORE_ASSERT(false, "RendererAPI::None is not supported!"); return nullptr;
-			case RendererAPI::OpenGL: return new OpenGLIndexBuffer(indices, count);
+			case RendererAPI::API::None: M_CORE_ASSERT(false, "RendererAPI::None is not supported!"); return nullptr;
+			case RendererAPI::API::OpenGL: return new OpenGLIndexBuffer(indices, count);
 		}
 
 		M_CORE_ASSERT(false, "Unknown Renderer API.");

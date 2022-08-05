@@ -7,7 +7,6 @@
 #include "Mawar/LayerStack.hpp"
 #include "Mawar/ImGui/ImGuiLayer.hpp"
 #include "Mawar/Renderer/Shader.hpp"
-#include "Mawar/Renderer/Buffer.hpp"
 #include "Mawar/Renderer/VertexArray.hpp"
 
 namespace Mawar
