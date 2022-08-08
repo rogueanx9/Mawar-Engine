@@ -8,6 +8,7 @@
 #include "Mawar/ImGui/ImGuiLayer.hpp"
 #include "Mawar/Renderer/Shader.hpp"
 #include "Mawar/Renderer/VertexArray.hpp"
+#include "Mawar/Renderer/OrthographicCamera.hpp"
 
 namespace Mawar
 {
@@ -37,6 +38,8 @@ namespace Mawar
 
 		std::shared_ptr<VertexArray> m_VertexArray;
 		std::shared_ptr<VertexArray> m_SquareVertexArray;
+
+		OrthographicCamera m_Camera;
 
 	private:
 		static Application* s_Instance;

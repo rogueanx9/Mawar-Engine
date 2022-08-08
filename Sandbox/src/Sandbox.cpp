@@ -29,8 +29,6 @@ public:
 			Mawar::KeyPressedEvent& event = (Mawar::KeyPressedEvent&)e;
 			M_TRACE("{0} is pressed.", (char)event.GetKeyCode());
 		}
-		else
-			M_TRACE("{0}", e);
 	}
 
 private:

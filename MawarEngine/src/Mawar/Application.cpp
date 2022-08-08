@@ -4,6 +4,8 @@
 #include "Mawar/Log.hpp"
 #include "Mawar/Renderer/Renderer.hpp"
 
+#include "Mawar/KeyCodes.hpp"
+
 namespace Mawar
 {
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
@@ -11,6 +13,7 @@ namespace Mawar
 	Application* Application::s_Instance = nullptr;
 
 	Application::Application()
+		: m_Camera(-2.0f, 2.0f, -1.5f, 1.5f)
 	{
 		/// <summary>
 		/// Initialization
@@ -81,6 +84,8 @@ namespace Mawar
              layout(location=0) in vec3 a_Position;
              layout(location=1) in vec4 a_Color;
 
+             uniform mat4 u_ViewProjection;
+
              out vec3 v_Position;
              out vec4 v_Color;
 
@@ -88,7 +93,7 @@ namespace Mawar
              {
                   v_Position = a_Position;
                   v_Color = a_Color;
-                  gl_Position = vec4(a_Position, 1.0);
+                  gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
              }
         )";
 
@@ -120,6 +125,26 @@ namespace Mawar
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
 		{
 			(*--it)->OnEvent(e);
+
+			if (e.GetEventType() == Mawar::EventType::KeyPressed)
+			{
+				Mawar::KeyPressedEvent& event = (Mawar::KeyPressedEvent&)e;
+				glm::vec3 pos = m_Camera.GetPosition();
+
+				if (event.GetKeyCode() == M_KEY_W)
+					m_Camera.SetPosition({pos.x, pos.y + -0.01f, pos.z });
+				if (event.GetKeyCode() == M_KEY_A)
+					m_Camera.SetPosition({ pos.x + 0.01f, pos.y, pos.z });
+				if (event.GetKeyCode() == M_KEY_S)
+					m_Camera.SetPosition({ pos.x, pos.y + 0.01f, pos.z });
+				if (event.GetKeyCode() == M_KEY_D)
+					m_Camera.SetPosition({ pos.x + -0.01f, pos.y, pos.z });
+
+				if (event.GetKeyCode() == M_KEY_PERIOD)
+					m_Camera.SetRotation(m_Camera.GetRotation() + 0.1f);
+				if (event.GetKeyCode() == M_KEY_COMMA)
+					m_Camera.SetRotation(m_Camera.GetRotation() - 0.1f);
+			}
 			if (e.Handled)
 				break;
 		}
@@ -134,11 +159,9 @@ namespace Mawar
 			RenderCommand::SetClearColor({ clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w });
 			RenderCommand::Clear();
 
-			m_Shader->Bind();
-
-			Renderer::BeginScene();
-			Renderer::Submit(m_SquareVertexArray);
-			Renderer::Submit(m_VertexArray);
+			Renderer::BeginScene(m_Camera);
+			Renderer::Submit(m_Shader, m_SquareVertexArray);
+			Renderer::Submit(m_Shader, m_VertexArray);
 			Renderer::EndScene();
 
 			for (Layer* layer : m_LayerStack)

@@ -162,6 +162,7 @@
     <ClInclude Include="src\Mawar\Platform\Windows\WindowsWindow.hpp" />
     <ClInclude Include="src\Mawar\Renderer\Buffer.hpp" />
     <ClInclude Include="src\Mawar\Renderer\GraphicContext.hpp" />
+    <ClInclude Include="src\Mawar\Renderer\OrthographicCamera.hpp" />
     <ClInclude Include="src\Mawar\Renderer\RenderCommand.hpp" />
     <ClInclude Include="src\Mawar\Renderer\Renderer.hpp" />
     <ClInclude Include="src\Mawar\Renderer\RendererAPI.hpp" />
@@ -600,6 +601,7 @@
     <ClCompile Include="src\Mawar\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Mawar\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Mawar\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Mawar\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Mawar\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Mawar\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Mawar\Renderer\RendererAPI.cpp" />
