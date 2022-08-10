@@ -8,7 +8,7 @@
 
 namespace Mawar
 {
-	static ImVec4 m_clear_color = ImVec4(0.1f, 0.1f, 0.1f, 1.00f);
+	static ImVec4 m_clear_color = { 0.2f, 0.2f, 0.2f, 1.0f };
 
 	ImGuiLayer::ImGuiLayer()
 		: Layer("ImGui Layer")
@@ -129,10 +129,5 @@ namespace Mawar
 			ImGui::RenderPlatformWindowsDefault();
 			glfwMakeContextCurrent(backup_current_context);
 		}
-	}
-
-	IMGUIClearColor ImGuiLayer::GetClearColor()
-	{
-		return { m_clear_color.x, m_clear_color.y, m_clear_color.z, m_clear_color.w };
 	}
 }
