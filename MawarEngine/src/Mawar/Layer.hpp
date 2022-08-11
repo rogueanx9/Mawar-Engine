@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Mawar/Events/Event.hpp"
+#include "Mawar/Core/Timestep.hpp"
 
 namespace Mawar
 {
@@ -12,7 +13,7 @@ namespace Mawar
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& e) {}
 

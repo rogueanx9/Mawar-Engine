@@ -34,6 +34,7 @@ namespace Mawar
 
 		bool OnWindowClosed(WindowCloseEvent&);
 		bool m_Running = true;
+		float m_LastFrameTime;
 
 	private:
 		static Application* s_Instance;

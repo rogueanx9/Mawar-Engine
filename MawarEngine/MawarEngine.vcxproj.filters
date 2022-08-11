@@ -1356,6 +1356,7 @@
     <ClInclude Include="src\Mawar\Renderer\RenderCommand.hpp" />
     <ClInclude Include="src\Mawar\Platform\OpenGL\OpenGLRendererAPI.hpp" />
     <ClInclude Include="src\Mawar\Renderer\OrthographicCamera.hpp" />
+    <ClInclude Include="src\Mawar\Core\Timestep.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Mawar\Application.cpp">

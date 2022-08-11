@@ -9,6 +9,8 @@
 #include "Mawar/KeyCodes.hpp"
 #include "Mawar/MouseButtonCodes.hpp"
 
+#include "Mawar/Core/Timestep.hpp"
+
 //--- Renderer ---
 #include "Mawar/Renderer/Renderer.hpp"
 #include "Mawar/Renderer/RenderCommand.hpp"

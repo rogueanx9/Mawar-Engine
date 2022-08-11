@@ -96,25 +96,27 @@ public:
 		m_Shader.reset(new Mawar::Shader(vertexSource, fragmentSource));
 	}
 
-	void OnUpdate() override
+	void OnUpdate(Mawar::Timestep ts) override
 	{
+		//M_TRACE("Delta time: {0}s {1}ms", ts.GetSecond(), ts.GetMiliSecond());
+
 		if (Mawar::Input::IsKeyPressed(M_KEY_UP))
-			m_CameraPosition.y += m_CameraMoveSpeed;
+			m_CameraPosition.y += m_CameraMoveSpeed * ts;
 
 		if (Mawar::Input::IsKeyPressed(M_KEY_DOWN))
-			m_CameraPosition.y -= m_CameraMoveSpeed;
+			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
 			
 		if (Mawar::Input::IsKeyPressed(M_KEY_LEFT))
-			m_CameraPosition.x -= m_CameraMoveSpeed;
+			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
 			
 		if (Mawar::Input::IsKeyPressed(M_KEY_RIGHT))
-			m_CameraPosition.x += m_CameraMoveSpeed;
+			m_CameraPosition.x += m_CameraMoveSpeed * ts;
 
 		if (Mawar::Input::IsKeyPressed(M_KEY_A))
-			m_CameraRotation += m_CameraRotationSpeed;
+			m_CameraRotation += m_CameraRotationSpeed * ts;
 
 		if (Mawar::Input::IsKeyPressed(M_KEY_D))
-			m_CameraRotation -= m_CameraRotationSpeed;
+			m_CameraRotation -= m_CameraRotationSpeed * ts;
 
 		glm::vec4 clear_color = { 0.2f,0.2f,0.2f,1.0f };
 
@@ -153,7 +155,7 @@ private:
 
 	Mawar::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
-	float m_CameraMoveSpeed = 0.05f;
+	float m_CameraMoveSpeed = 0.8f;
 
 	float m_CameraRotation = 0.0f;
 	float m_CameraRotationSpeed = 1.0f;

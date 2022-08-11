@@ -44,6 +44,7 @@ namespace Mawar
 			glfwSwapInterval(0);
 
 		m_Data.Vsync = enabled;
+		M_CORE_TRACE("Set VSync to {0}", IsVSync());
 	}
 
 	bool WindowsWindow::IsVSync() const
@@ -79,7 +80,6 @@ namespace Mawar
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		M_CORE_TRACE("Set Window User Pointer");
 		SetVSync(true);
-		M_CORE_TRACE("Set VSync to true");
 
 		// Set Event Callback
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
