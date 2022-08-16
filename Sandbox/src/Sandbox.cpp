@@ -3,6 +3,7 @@
 #include "imgui.h"
 
 #include <glm/gtc/matrix_transform.hpp>
+#include "Mawar/Platform/OpenGL/OpenGLShader.hpp"
 
 class LayerExample : public Mawar::Layer
 {
@@ -96,7 +97,45 @@ public:
              }
         )";
 
-		m_Shader.reset(new Mawar::Shader(vertexSource, fragmentSource));
+		m_Shader.reset(Mawar::Shader::Create(vertexSource, fragmentSource));
+
+		std::string SquarevertexSource = R"(
+             #version 330 core
+
+             layout(location=0) in vec3 a_Position;
+             layout(location=1) in vec4 a_Color;
+
+             uniform mat4 u_ViewProjection;
+             uniform mat4 u_Transform;
+
+             out vec3 v_Position;
+             out vec4 v_Color;
+
+             void main()
+             {
+                  v_Position = a_Position;
+                  v_Color = a_Color;
+                  gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+             }
+        )";
+
+		std::string SquarefragmentSource = R"(
+             #version 330 core
+
+             layout(location=0) out vec4 color;
+
+             in vec3 v_Position;
+             in vec4 v_Color;
+
+             uniform vec4 u_Color;
+
+             void main()
+             {
+                  color = u_Color;
+             }
+        )";
+
+		m_SquareShader.reset(Mawar::Shader::Create(SquarevertexSource, SquarefragmentSource));
 	}
 
 	void OnUpdate(Mawar::Timestep ts) override
@@ -141,13 +180,17 @@ public:
 
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 		Mawar::Renderer::BeginScene(m_Camera);
+
+		m_SquareShader->Bind();
+		glm::vec4 square_color(SquareColor.x, SquareColor.y, SquareColor.z, SquareColor.w);
+		std::dynamic_pointer_cast<Mawar::OpenGLShader>(m_SquareShader)->UploadUniformFloat4("u_Color", square_color);
 		for (int i = 0; i < 10; i++)
 		{
 			for (int j = 0; j < 10; j++)
 			{
 				glm::vec3 pos(0.18f * j, 0.18f * i, 0.0f);
 				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
-				Mawar::Renderer::Submit(m_Shader, m_SquareVertexArray, transform);
+				Mawar::Renderer::Submit(m_SquareShader, m_SquareVertexArray, transform);
 			}
 		}
 
@@ -163,6 +206,7 @@ public:
 			ImGui::TextColored(TextCol, "Halo ini window baru dari layer example\npada aplikasi sandbox.");
 			ImGui::ColorEdit3("Text Color", (float*)&TextCol);
 			ImGui::ColorEdit3("Clear Color", (float*)&ClearColor);
+			ImGui::ColorEdit3("Square Color", (float*)&SquareColor);
 			ImGui::End();
 		}
 	}
@@ -174,8 +218,10 @@ public:
 private:
 	ImVec4 TextCol = ImVec4{ 0.8f,0.8f,0.8f,1.0f };
 	ImVec4 ClearColor = ImVec4{ 0.2f,0.2f,0.2f,1.0f };
+	ImVec4 SquareColor = ImVec4{ 0.2f,0.3f,0.8f,1.0f };
 
-	std::unique_ptr<Mawar::Shader> m_Shader;
+	std::shared_ptr<Mawar::Shader> m_Shader;
+	std::shared_ptr<Mawar::Shader> m_SquareShader;
 	std::shared_ptr<Mawar::VertexArray> m_VertexArray;
 	std::shared_ptr<Mawar::VertexArray> m_SquareVertexArray;
 

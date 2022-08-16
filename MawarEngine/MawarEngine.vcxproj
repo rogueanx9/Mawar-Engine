@@ -158,6 +158,7 @@
     <ClInclude Include="src\Mawar\MouseButtonCodes.hpp" />
     <ClInclude Include="src\Mawar\Platform\OpenGL\OpenGLBuffer.hpp" />
     <ClInclude Include="src\Mawar\Platform\OpenGL\OpenGLContext.hpp" />
+    <ClInclude Include="src\Mawar\Platform\OpenGL\OpenGLShader.hpp" />
     <ClInclude Include="src\Mawar\Platform\OpenGL\OpenGLVertexArray.hpp" />
     <ClInclude Include="src\Mawar\Platform\Windows\WindowsInput.hpp" />
     <ClInclude Include="src\Mawar\Platform\Windows\WindowsWindow.hpp" />
@@ -598,6 +599,7 @@
     <ClCompile Include="src\Mawar\Log.cpp" />
     <ClCompile Include="src\Mawar\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Mawar\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Mawar\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Mawar\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Mawar\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Mawar\Platform\Windows\WindowsWindow.cpp" />

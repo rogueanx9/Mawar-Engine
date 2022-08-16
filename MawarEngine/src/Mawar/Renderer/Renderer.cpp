@@ -1,6 +1,8 @@
 #include "mpch.hpp"
 #include "Renderer.hpp"
 
+#include "Mawar/Platform/OpenGL/OpenGLShader.hpp"
+
 namespace Mawar
 {
     Renderer::SceneData* Renderer::m_SceneData = new Renderer::SceneData;
@@ -14,11 +16,11 @@ namespace Mawar
     {
     }
 
-    void Renderer::Submit(const std::unique_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform)
+    void Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform)
     {
         shader->Bind();
-        shader->UploadUniformMat4f("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
-        shader->UploadUniformMat4f("u_Transform", transform);
+        std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4f("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
+        std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4f("u_Transform", transform);
 
         vertexArray->Bind();
         RenderCommand::DrawIndexed(vertexArray);
