@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #ifdef M_PLATFORM_W10
 #ifdef M_DYNAMIC_LINK
 	#ifdef M_BUILD_DLL
@@ -25,3 +27,12 @@
 #endif
 
 #define M_BIND_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
+namespace Mawar
+{
+	template<typename T>
+	using Ref = std::shared_ptr<T>;
+
+	template<typename T>
+	using Scope = std::unique_ptr<T>;
+}
