@@ -26,7 +26,7 @@ public:
 			 0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
 			 0.0f,  0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f
 		};
-		std::shared_ptr<Mawar::VertexBuffer> triangleVB;
+		Mawar::Ref<Mawar::VertexBuffer> triangleVB;
 		triangleVB.reset(Mawar::VertexBuffer::Create(vertices, sizeof(vertices)));
 		triangleVB->SetLayout({
 			{Mawar::ShaderDataType::Float3, "a_Position"},
@@ -35,7 +35,7 @@ public:
 		m_VertexArray->AddVertexBuffer(triangleVB);
 
 		unsigned int indices[3] = { 0,1,2 };
-		std::shared_ptr<Mawar::IndexBuffer> triangleIB;
+		Mawar::Ref<Mawar::IndexBuffer> triangleIB;
 		triangleIB.reset(Mawar::IndexBuffer::Create(indices, 3));
 		m_VertexArray->SetIndexBuffer(triangleIB);
 
@@ -49,7 +49,7 @@ public:
 			 0.75f,  0.75f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
 			-0.75f,  0.75f, 0.0f, 0.8f, 0.2f, 0.3f, 1.0f,
 		};
-		std::shared_ptr<Mawar::VertexBuffer> squareVB;
+		Mawar::Ref<Mawar::VertexBuffer> squareVB;
 		squareVB.reset(Mawar::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVB->SetLayout({
 			{Mawar::ShaderDataType::Float3, "a_Position"},
@@ -58,7 +58,7 @@ public:
 		m_SquareVertexArray->AddVertexBuffer(squareVB);
 
 		unsigned int squareIndices[] = { 0,1,2,2,3,0 };
-		std::shared_ptr<Mawar::IndexBuffer> squareIB;
+		Mawar::Ref<Mawar::IndexBuffer> squareIB;
 		squareIB.reset(Mawar::IndexBuffer::Create(squareIndices, 6));
 		m_SquareVertexArray->SetIndexBuffer(squareIB);
 
@@ -220,10 +220,10 @@ private:
 	ImVec4 ClearColor = ImVec4{ 0.2f,0.2f,0.2f,1.0f };
 	ImVec4 SquareColor = ImVec4{ 0.2f,0.3f,0.8f,1.0f };
 
-	std::shared_ptr<Mawar::Shader> m_Shader;
-	std::shared_ptr<Mawar::Shader> m_SquareShader;
-	std::shared_ptr<Mawar::VertexArray> m_VertexArray;
-	std::shared_ptr<Mawar::VertexArray> m_SquareVertexArray;
+	Mawar::Ref<Mawar::Shader> m_Shader;
+	Mawar::Ref<Mawar::Shader> m_SquareShader;
+	Mawar::Ref<Mawar::VertexArray> m_VertexArray;
+	Mawar::Ref<Mawar::VertexArray> m_SquareVertexArray;
 
 	Mawar::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
