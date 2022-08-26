@@ -18,6 +18,7 @@
 #include "Mawar/Renderer/Shader.hpp"
 #include "Mawar/Renderer/Buffer.hpp"
 #include "Mawar/Renderer/VertexArray.hpp"
+#include "Mawar/Renderer/Texture.hpp"
 
 #include "Mawar/Renderer/OrthographicCamera.hpp"
 //-------------------

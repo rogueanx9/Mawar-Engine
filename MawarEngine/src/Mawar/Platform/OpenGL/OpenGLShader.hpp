@@ -14,9 +14,9 @@ namespace Mawar
 		void Bind() const override;
 		void Unbind() const override;
 
-		void UploadUniformInt1(const std::string& name, int vector);
+		void UploadUniformInt(const std::string& name, int vector);
 
-		void UploadUniformFloat1(const std::string& name, float vector);
+		void UploadUniformFloat(const std::string& name, float vector);
 		void UploadUniformFloat2(const std::string& name, const glm::vec2& vector);
 		void UploadUniformFloat3(const std::string& name, const glm::vec3& vector);
 		void UploadUniformFloat4(const std::string& name, const glm::vec4& vector);

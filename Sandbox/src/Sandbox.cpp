@@ -20,40 +20,41 @@ public:
 		/// <summary>
 		/// Triangle
 		/// </summary>
-		float vertices[3 * 7] =
+		float vertices[5 * 4] =
 		{
-			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
-			 0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
-			 0.0f,  0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 		Mawar::Ref<Mawar::VertexBuffer> triangleVB;
 		triangleVB.reset(Mawar::VertexBuffer::Create(vertices, sizeof(vertices)));
 		triangleVB->SetLayout({
 			{Mawar::ShaderDataType::Float3, "a_Position"},
-			{Mawar::ShaderDataType::Float4, "a_Color"}
+			{Mawar::ShaderDataType::Float2, "a_TexCoord"}
 			});
 		m_VertexArray->AddVertexBuffer(triangleVB);
 
-		unsigned int indices[3] = { 0,1,2 };
+		unsigned int indices[6] = { 0,1,2,2,3,0 };
 		Mawar::Ref<Mawar::IndexBuffer> triangleIB;
-		triangleIB.reset(Mawar::IndexBuffer::Create(indices, 3));
+		triangleIB.reset(Mawar::IndexBuffer::Create(indices, 6));
 		m_VertexArray->SetIndexBuffer(triangleIB);
 
 		/// <summary>
 		/// Square
 		/// </summary>
-		float squareVertices[4 * 7] =
+		float squareVertices[5 * 4] =
 		{
-			-0.75f, -0.75f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
-			 0.75f, -0.75f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f,
-			 0.75f,  0.75f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
-			-0.75f,  0.75f, 0.0f, 0.8f, 0.2f, 0.3f, 1.0f,
+			-0.75f, -0.75f, 0.0f, 0.0f, 0.0f,
+			 0.75f, -0.75f, 0.0f, 1.0f, 0.0f,
+			 0.75f,  0.75f, 0.0f, 1.0f, 1.0f,
+			-0.75f,  0.75f, 0.0f, 0.0f, 1.0f
 		};
 		Mawar::Ref<Mawar::VertexBuffer> squareVB;
 		squareVB.reset(Mawar::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVB->SetLayout({
 			{Mawar::ShaderDataType::Float3, "a_Position"},
-			{Mawar::ShaderDataType::Float4, "a_Color"}
+			{Mawar::ShaderDataType::Float2, "a_TexCoord"}
 			});
 		m_SquareVertexArray->AddVertexBuffer(squareVB);
 
@@ -66,18 +67,18 @@ public:
              #version 330 core
 
              layout(location=0) in vec3 a_Position;
-             layout(location=1) in vec4 a_Color;
+             layout(location=1) in vec2 a_TexCoord;
 
              uniform mat4 u_ViewProjection;
              uniform mat4 u_Transform;
 
              out vec3 v_Position;
-             out vec4 v_Color;
+             out vec2 v_TexCoord;
 
              void main()
              {
                   v_Position = a_Position;
-                  v_Color = a_Color;
+                  v_TexCoord = a_TexCoord;
                   gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
              }
         )";
@@ -88,12 +89,13 @@ public:
              layout(location=0) out vec4 color;
 
              in vec3 v_Position;
-             in vec4 v_Color;
+             in vec2 v_TexCoord;
+
+             uniform sampler2D u_Texture;
 
              void main()
              {
-                  color = vec4(v_Position * 0.5 + 0.6, 1.0);
-                  color = v_Color;
+                  color = texture(u_Texture, v_TexCoord);
              }
         )";
 
@@ -103,18 +105,18 @@ public:
              #version 330 core
 
              layout(location=0) in vec3 a_Position;
-             layout(location=1) in vec4 a_Color;
+             layout(location=1) in vec2 a_TexCoord;
 
              uniform mat4 u_ViewProjection;
              uniform mat4 u_Transform;
 
              out vec3 v_Position;
-             out vec4 v_Color;
+             out vec2 v_TexCoord;
 
              void main()
              {
                   v_Position = a_Position;
-                  v_Color = a_Color;
+                  v_TexCoord = a_TexCoord;
                   gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
              }
         )";
@@ -125,7 +127,7 @@ public:
              layout(location=0) out vec4 color;
 
              in vec3 v_Position;
-             in vec4 v_Color;
+             in vec2 v_TexCoord;
 
              uniform vec4 u_Color;
 
@@ -136,6 +138,10 @@ public:
         )";
 
 		m_SquareShader.reset(Mawar::Shader::Create(SquarevertexSource, SquarefragmentSource));
+
+		m_Texture = Mawar::Texture2D::Create("assets/images/bird.png");
+		std::dynamic_pointer_cast<Mawar::OpenGLShader>(m_Shader)->Bind();
+		std::dynamic_pointer_cast<Mawar::OpenGLShader>(m_Shader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Mawar::Timestep ts) override
@@ -194,6 +200,7 @@ public:
 			}
 		}
 
+		m_Texture->Bind();
 		glm::mat4 transform1 = glm::translate(glm::mat4(1.0f), m_TransformPosition);
 		Mawar::Renderer::Submit(m_Shader, m_VertexArray, transform1);
 		Mawar::Renderer::EndScene();
@@ -224,6 +231,8 @@ private:
 	Mawar::Ref<Mawar::Shader> m_SquareShader;
 	Mawar::Ref<Mawar::VertexArray> m_VertexArray;
 	Mawar::Ref<Mawar::VertexArray> m_SquareVertexArray;
+
+	Mawar::Ref<Mawar::Texture2D> m_Texture;
 
 	Mawar::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;

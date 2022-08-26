@@ -134,13 +134,13 @@ namespace Mawar
 		glUseProgram(0);
 	}
 
-	void OpenGLShader::UploadUniformInt1(const std::string& name, int value)
+	void OpenGLShader::UploadUniformInt(const std::string& name, int value)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform1i(location, value);
 	}
 
-	void OpenGLShader::UploadUniformFloat1(const std::string& name, float value)
+	void OpenGLShader::UploadUniformFloat(const std::string& name, float value)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform1f(location, value);
