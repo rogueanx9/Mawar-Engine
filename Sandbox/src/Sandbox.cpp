@@ -140,8 +140,9 @@ public:
 		m_SquareShader.reset(Mawar::Shader::Create(SquarevertexSource, SquarefragmentSource));
 
 		m_Texture = Mawar::Texture2D::Create("assets/images/bird.png");
+		m_CatTexture = Mawar::Texture2D::Create("assets/images/cat.png");
 		std::dynamic_pointer_cast<Mawar::OpenGLShader>(m_Shader)->Bind();
-		std::dynamic_pointer_cast<Mawar::OpenGLShader>(m_Shader)->UploadUniformInt("u_Texture", 0);
+		std::dynamic_pointer_cast<Mawar::OpenGLShader>(m_Shader)->UploadUniformInt("u_Texture", 0); // Upload slot ID
 	}
 
 	void OnUpdate(Mawar::Timestep ts) override
@@ -200,9 +201,12 @@ public:
 			}
 		}
 
-		m_Texture->Bind();
 		glm::mat4 transform1 = glm::translate(glm::mat4(1.0f), m_TransformPosition);
+		glm::mat4 moveSlight = glm::translate(glm::mat4(1.0f), glm::vec3(0.25f, 0.25f, 0.0f));
+		m_Texture->Bind();
 		Mawar::Renderer::Submit(m_Shader, m_VertexArray, transform1);
+		m_CatTexture->Bind();
+		Mawar::Renderer::Submit(m_Shader, m_VertexArray, transform1 + moveSlight);
 		Mawar::Renderer::EndScene();
 	}
 
@@ -232,7 +236,7 @@ private:
 	Mawar::Ref<Mawar::VertexArray> m_VertexArray;
 	Mawar::Ref<Mawar::VertexArray> m_SquareVertexArray;
 
-	Mawar::Ref<Mawar::Texture2D> m_Texture;
+	Mawar::Ref<Mawar::Texture2D> m_Texture, m_CatTexture;
 
 	Mawar::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
