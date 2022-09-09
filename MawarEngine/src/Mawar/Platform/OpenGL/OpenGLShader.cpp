@@ -23,9 +23,17 @@ namespace Mawar
 		std::string source = ReadFile(filepath);
 		auto shaderSources = PreProcess(source);
 		Compile(shaderSources);
+
+		// Parsing assets/shaders/Texture.glsl -> Texture
+		auto lastSlash = filepath.find_last_of("/\\");
+		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+		auto lastDot = filepath.rfind('.');
+		lastDot = lastDot == std::string::npos ? filepath.size() : lastDot;
+		m_Name = filepath.substr(lastSlash, lastDot - lastSlash);
 	}
 
-	OpenGLShader::OpenGLShader(const std::string& vertexSource, const std::string& fragmentSource)
+	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource)
+		: m_Name(name)
 	{
 		std::unordered_map<GLenum, std::string> shaderSources;
 		shaderSources[GL_VERTEX_SHADER] = vertexSource;
@@ -139,7 +147,10 @@ namespace Mawar
 	void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
 		uint32_t program = glCreateProgram();
-		std::vector<GLuint> shaders;
+
+		M_CORE_ASSERT(shaderSources.size() <= 2, "You cannot input more than 2 shaders.");
+		std::array<GLuint, 2> shaders;
+		uint8_t shaderIndex = 0;
 		for (auto&& [type, shaderSource] : shaderSources)
 		{
 			// Create an empty vertex shader handle
@@ -175,7 +186,7 @@ namespace Mawar
 				break;
 			}
 			glAttachShader(program, shader);
-			shaders.push_back(shader);
+			shaders[shaderIndex++] = shader;
 		}
 
 		// Vertex and fragment shaders are successfully compiled.

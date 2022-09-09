@@ -63,7 +63,7 @@ public:
 		squareIB.reset(Mawar::IndexBuffer::Create(squareIndices, 6));
 		m_SquareVertexArray->SetIndexBuffer(squareIB);
 
-		m_Shader.reset(Mawar::Shader::Create("assets/shaders/Texture.glsl"));
+		auto m_Shader = Mawar::Renderer::GetShaderLibrary()->Load("assets/shaders/Texture.glsl");
 
 		std::string SquarevertexSource = R"(
              #version 330 core
@@ -101,7 +101,7 @@ public:
              }
         )";
 
-		m_SquareShader.reset(Mawar::Shader::Create(SquarevertexSource, SquarefragmentSource));
+		Mawar::Renderer::GetShaderLibrary()->Add(Mawar::Shader::Create("SquareShader", SquarevertexSource, SquarefragmentSource));
 
 		m_Texture = Mawar::Texture2D::Create("assets/images/bird.png");
 		m_CatTexture = Mawar::Texture2D::Create("assets/images/cat.png");
@@ -152,6 +152,7 @@ public:
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 		Mawar::Renderer::BeginScene(m_Camera);
 
+		auto m_SquareShader = Mawar::Renderer::GetShaderLibrary()->Get("SquareShader");
 		m_SquareShader->Bind();
 		glm::vec4 square_color(SquareColor.x, SquareColor.y, SquareColor.z, SquareColor.w);
 		std::dynamic_pointer_cast<Mawar::OpenGLShader>(m_SquareShader)->UploadUniformFloat4("u_Color", square_color);
@@ -164,6 +165,8 @@ public:
 				Mawar::Renderer::Submit(m_SquareShader, m_SquareVertexArray, transform);
 			}
 		}
+
+		auto m_Shader = Mawar::Renderer::GetShaderLibrary()->Get("Texture");
 
 		glm::mat4 transform1 = glm::translate(glm::mat4(1.0f), m_TransformPosition);
 		glm::mat4 moveSlight = glm::translate(glm::mat4(1.0f), glm::vec3(0.25f, 0.25f, 0.0f));
@@ -195,8 +198,6 @@ private:
 	ImVec4 ClearColor = ImVec4{ 0.2f,0.2f,0.2f,1.0f };
 	ImVec4 SquareColor = ImVec4{ 0.2f,0.3f,0.8f,1.0f };
 
-	Mawar::Ref<Mawar::Shader> m_Shader;
-	Mawar::Ref<Mawar::Shader> m_SquareShader;
 	Mawar::Ref<Mawar::VertexArray> m_VertexArray;
 	Mawar::Ref<Mawar::VertexArray> m_SquareVertexArray;
 

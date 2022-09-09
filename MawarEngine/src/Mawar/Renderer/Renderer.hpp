@@ -14,6 +14,7 @@ namespace Mawar
 		static void EndScene();
 		static void Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform = glm::mat4(1.0f));
 
+		inline static ShaderLibrary* GetShaderLibrary() { return s_ShaderLibrary; }
 		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 
 	private:
@@ -22,5 +23,6 @@ namespace Mawar
 			glm::mat4 ViewProjectionMatrix;
 		};
 		static SceneData* m_SceneData;
+		static ShaderLibrary* s_ShaderLibrary;
 	};
 }

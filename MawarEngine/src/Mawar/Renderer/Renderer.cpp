@@ -6,6 +6,7 @@
 namespace Mawar
 {
     Renderer::SceneData* Renderer::m_SceneData = new Renderer::SceneData;
+    ShaderLibrary* Renderer::s_ShaderLibrary = new ShaderLibrary;
 
     void Renderer::Init()
     {
