@@ -11,6 +11,8 @@
 
 #include "Mawar/Core/Timestep.hpp"
 
+#include "Mawar/OrthographicCameraController.hpp"
+
 //--- Renderer ---
 #include "Mawar/Renderer/Renderer.hpp"
 #include "Mawar/Renderer/RenderCommand.hpp"

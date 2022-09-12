@@ -155,6 +155,7 @@
     <ClInclude Include="src\Mawar\LayerStack.hpp" />
     <ClInclude Include="src\Mawar\Log.hpp" />
     <ClInclude Include="src\Mawar\MouseButtonCodes.hpp" />
+    <ClInclude Include="src\Mawar\OrthographicCameraController.hpp" />
     <ClInclude Include="src\Mawar\Platform\OpenGL\OpenGLBuffer.hpp" />
     <ClInclude Include="src\Mawar\Platform\OpenGL\OpenGLContext.hpp" />
     <ClInclude Include="src\Mawar\Platform\OpenGL\OpenGLRendererAPI.hpp" />
@@ -599,6 +600,7 @@
     <ClCompile Include="src\Mawar\Layer.cpp" />
     <ClCompile Include="src\Mawar\LayerStack.cpp" />
     <ClCompile Include="src\Mawar\Log.cpp" />
+    <ClCompile Include="src\Mawar\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Mawar\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Mawar\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Mawar\Platform\OpenGL\OpenGLRendererAPI.cpp" />

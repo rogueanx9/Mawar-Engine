@@ -9,7 +9,7 @@ class LayerExample : public Mawar::Layer
 {
 public:
 	LayerExample()
-		: Layer("Example"), m_Camera(-2.0f, 2.0f, -1.5f, 1.5f), m_CameraPosition(0.0f), m_TransformPosition(0.0f)
+		: Layer("Example"), m_CameraController(4/3), m_TransformPosition(0.0f)
 	{
 		/// <summary>
 		/// OpenGL Rendering Object
@@ -112,24 +112,7 @@ public:
 	void OnUpdate(Mawar::Timestep ts) override
 	{
 		//M_TRACE("Delta time: {0}s {1}ms", ts.GetSecond(), ts.GetMiliSecond());
-
-		if (Mawar::Input::IsKeyPressed(M_KEY_UP))
-			m_CameraPosition.y += m_CameraMoveSpeed * ts;
-
-		if (Mawar::Input::IsKeyPressed(M_KEY_DOWN))
-			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
-			
-		if (Mawar::Input::IsKeyPressed(M_KEY_LEFT))
-			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
-			
-		if (Mawar::Input::IsKeyPressed(M_KEY_RIGHT))
-			m_CameraPosition.x += m_CameraMoveSpeed * ts;
-
-		if (Mawar::Input::IsKeyPressed(M_KEY_COMMA))
-			m_CameraRotation += m_CameraRotationSpeed * ts;
-
-		if (Mawar::Input::IsKeyPressed(M_KEY_APOSTROPHE))
-			m_CameraRotation -= m_CameraRotationSpeed * ts;
+		m_CameraController.OnUpdate(ts);
 
 		if (Mawar::Input::IsKeyPressed(M_KEY_W))
 			m_TransformPosition.y += m_TransformMoveSpeed * ts;
@@ -146,11 +129,8 @@ public:
 		Mawar::RenderCommand::SetClearColor({ ClearColor.x * ClearColor.w, ClearColor.y * ClearColor.w, ClearColor.z * ClearColor.w, ClearColor.w });
 		Mawar::RenderCommand::Clear();
 
-		m_Camera.SetPosition(m_CameraPosition);
-		m_Camera.SetRotation(m_CameraRotation);
-
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
-		Mawar::Renderer::BeginScene(m_Camera);
+		Mawar::Renderer::BeginScene(m_CameraController.GetCamera());
 
 		auto m_SquareShader = Mawar::Renderer::GetShaderLibrary()->Get("SquareShader");
 		m_SquareShader->Bind();
@@ -191,6 +171,7 @@ public:
 
 	void OnEvent(Mawar::Event& e) override
 	{
+		m_CameraController.OnEvent(e);
 	}
 
 private:
@@ -203,12 +184,7 @@ private:
 
 	Mawar::Ref<Mawar::Texture2D> m_Texture, m_CatTexture;
 
-	Mawar::OrthographicCamera m_Camera;
-	glm::vec3 m_CameraPosition;
-	float m_CameraMoveSpeed = 0.8f;
-
-	float m_CameraRotation = 0.0f;
-	float m_CameraRotationSpeed = 1.0f;
+	Mawar::OrthographicCameraController m_CameraController;
 
 	glm::vec3 m_TransformPosition;
 	float m_TransformMoveSpeed = 1.0f;
