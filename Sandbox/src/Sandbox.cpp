@@ -159,14 +159,12 @@ public:
 
 	void OnImGuiRender() override
 	{
-		{
-			ImGui::Begin("Hello World!");
-			ImGui::TextColored(TextCol, "Halo ini window baru dari layer example\npada aplikasi sandbox.");
-			ImGui::ColorEdit3("Text Color", (float*)&TextCol);
-			ImGui::ColorEdit3("Clear Color", (float*)&ClearColor);
-			ImGui::ColorEdit3("Square Color", (float*)&SquareColor);
-			ImGui::End();
-		}
+		ImGui::Begin("Hello World!");
+		ImGui::TextColored(TextCol, "Halo ini window baru dari layer example\npada aplikasi sandbox.");
+		ImGui::ColorEdit3("Text Color", (float*)&TextCol);
+		ImGui::ColorEdit3("Clear Color", (float*)&ClearColor);
+		ImGui::ColorEdit3("Square Color", (float*)&SquareColor);
+		ImGui::End();
 	}
 
 	void OnEvent(Mawar::Event& e) override

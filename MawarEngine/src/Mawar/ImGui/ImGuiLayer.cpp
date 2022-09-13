@@ -113,10 +113,13 @@ namespace Mawar
 
 		// Rendering
 		ImGui::Render();
-		int display_w, display_h;
-		glfwGetFramebufferSize(window, &display_w, &display_h);
-		glViewport(0, 0, display_w, display_h);
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+		/*
+		 * int display_w, display_h;
+		 * glfwGetFramebufferSize(window, &display_w, &display_h);
+		 * glViewport(0, 0, display_w, display_h);
+		 */
 
 		// Update and Render additional Platform Windows
 		// (Platform functions may change the current OpenGL context, so we save/restore it to make it easier to paste this code elsewhere.
@@ -124,10 +127,10 @@ namespace Mawar
 		ImGuiIO& io = ImGui::GetIO();
 		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 		{
-			GLFWwindow* backup_current_context = glfwGetCurrentContext();
+			//GLFWwindow* backup_current_context = glfwGetCurrentContext();
 			ImGui::UpdatePlatformWindows();
 			ImGui::RenderPlatformWindowsDefault();
-			glfwMakeContextCurrent(backup_current_context);
+			glfwMakeContextCurrent(window);
 		}
 	}
 }

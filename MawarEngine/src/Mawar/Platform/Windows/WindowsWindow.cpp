@@ -44,7 +44,7 @@ namespace Mawar
 			glfwSwapInterval(0);
 
 		m_Data.Vsync = enabled;
-		M_CORE_TRACE("Set VSync to {0}", IsVSync());
+		M_CORE_TRACE("Set VSync to {0}", enabled);
 	}
 
 	bool WindowsWindow::IsVSync() const

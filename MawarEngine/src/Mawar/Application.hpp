@@ -28,15 +28,18 @@ namespace Mawar
 		inline Window& GetWindow() { return *m_Window; }
 
 	private:
+		bool OnWindowClosed(WindowCloseEvent& e);
+		bool OnWindowResize(WindowResizeEvent& e);
+
+	private:
 		Scope<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		LayerStack m_LayerStack;
 
-		bool OnWindowClosed(WindowCloseEvent&);
 		bool m_Running = true;
+		bool m_Minimized = false;
 		float m_LastFrameTime;
 
-	private:
 		static Application* s_Instance;
 	};
 
