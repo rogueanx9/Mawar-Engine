@@ -47,7 +47,6 @@ namespace Mawar
 
 	void ImGuiLayer::OnDetach()
 	{
-		ImGui::DestroyContext();
 	}
 
 	void ImGuiLayer::OnImGuiRender()

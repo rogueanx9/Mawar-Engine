@@ -19,6 +19,9 @@ namespace Mawar
 		OrthographicCamera& GetCamera() { return m_Camera; }
 		const OrthographicCamera& GetCamera() const { return m_Camera; }
 
+		bool GetRotation() const { return m_Rotation; }
+		void SetRotation(bool rotation) { m_Rotation = rotation; }
+
 	private:
 		bool OnMouseScrolled(MouseScrolledEvent& e);
 		bool OnWindowResize(WindowResizeEvent& e);
@@ -30,7 +33,7 @@ namespace Mawar
 
 		glm::vec3 m_CameraPosition{ 0.0f, 0.0f, 0.0f };
 		float m_CameraRotation = 0.0f;
-		float m_CameraTranslationSpeed = 1.0f, m_CameraRotationSpeed = 1.0f;
+		float m_CameraTranslationSpeed = 1.0f, m_CameraRotationSpeed = 5.0f;
 
 		OrthographicCamera m_Camera;
 	};

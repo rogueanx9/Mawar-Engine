@@ -13,7 +13,7 @@ namespace Mawar
 		void Bind() const override;
 		void Unind() const override;
 
-		void AddVertexBuffer(Ref<VertexBuffer> vertexBuffer) override;
+		void AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) override;
 		void SetIndexBuffer(Ref<IndexBuffer> indexBuffer) override;
 
 		const std::vector<Ref<VertexBuffer>>& GetVertexBuffers() const override { return m_VertexBuffers; };
@@ -21,6 +21,7 @@ namespace Mawar
 
 	private:
 		uint32_t m_RendererID;
+		uint32_t m_VertexBufferIndex = 0;
 		std::vector<Ref<VertexBuffer>> m_VertexBuffers;
 		Ref<IndexBuffer> m_IndexBuffer;
 	};

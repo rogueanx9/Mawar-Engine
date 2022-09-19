@@ -222,6 +222,9 @@ namespace Mawar
 
 		// Always detach shaders after a successful link.
 		for (auto shader : shaders)
+		{
 			glDetachShader(m_RendererID, shader);
+			glDeleteShader(shader);
+		}
 	}
 }

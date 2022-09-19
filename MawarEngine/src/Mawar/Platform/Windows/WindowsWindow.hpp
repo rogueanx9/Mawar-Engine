@@ -31,7 +31,7 @@ namespace Mawar
 
 	private:
 		GLFWwindow* m_Window = nullptr;
-		GraphicContext* m_Context;
+		Scope<GraphicContext> m_Context;
 
 		struct WindowData
 		{

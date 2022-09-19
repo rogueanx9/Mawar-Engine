@@ -107,6 +107,8 @@ public:
 		m_CatTexture = Mawar::Texture2D::Create("assets/images/cat.png");
 		std::dynamic_pointer_cast<Mawar::OpenGLShader>(m_Shader)->Bind();
 		std::dynamic_pointer_cast<Mawar::OpenGLShader>(m_Shader)->UploadUniformInt("u_Texture", 0); // Upload slot ID
+
+		m_CameraController.SetRotation(true);
 	}
 
 	void OnUpdate(Mawar::Timestep ts) override

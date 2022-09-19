@@ -27,7 +27,7 @@ namespace Mawar
 		EventCategoryMouseButton      = BIT(4),
 	};
 
-#define EVENT_CLASS_TYPE(type) static EventType getStaticEventType() { return EventType::##type; }\
+#define EVENT_CLASS_TYPE(type) static EventType getStaticEventType() { return EventType::type; }\
                                EventType GetEventType() const override { return getStaticEventType(); }\
                                const char* GetName() const override { return #type; }
 

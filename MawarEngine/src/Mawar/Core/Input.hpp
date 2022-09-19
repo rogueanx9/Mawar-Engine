@@ -6,6 +6,13 @@ namespace Mawar
 {
 	class M_API Input
 	{
+	protected:
+		Input() = default;
+
+	public:
+		Input(const Input&) = delete;
+		Input& operator=(const Input&) = delete;
+
 	public:
 		static bool IsKeyPressed(int keycode) { return s_Instance->IsKeyPressed_impl(keycode); }
 
@@ -23,6 +30,6 @@ namespace Mawar
 		virtual float GetMouseY_impl() = 0;
 
 	private:
-		static Input* s_Instance;
+		static Scope<Input> s_Instance;
 	};
 }

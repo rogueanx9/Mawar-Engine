@@ -73,7 +73,7 @@ namespace Mawar
 		M_CORE_TRACE("Window Created");
 		M_CORE_ASSERT(m_Window, "Couldn't create window.");
 
-		m_Context = new OpenGLContext(m_Window);
+		m_Context = CreateScope<OpenGLContext>(m_Window);
 		M_CORE_TRACE("Context Created");
 
 		m_Context->Init();

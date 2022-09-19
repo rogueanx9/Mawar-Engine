@@ -47,25 +47,24 @@ namespace Mawar
 		glBindVertexArray(0);
 	}
 
-	void OpenGLVertexArray::AddVertexBuffer(Ref<VertexBuffer> vertexBuffer)
+	void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
 	{
 		M_CORE_ASSERT(vertexBuffer->GetLayout().GetElement().size(), "VertexBuffer has no layout!");
 
 		glBindVertexArray(m_RendererID);
 		vertexBuffer->Bind();
 
-		uint32_t index = 0;
 		const auto& layout = vertexBuffer->GetLayout();
 		for (auto& element : layout)
 		{
-			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index, 
+			glEnableVertexAttribArray(m_VertexBufferIndex);
+			glVertexAttribPointer(m_VertexBufferIndex, 
 				                  element.Count(), 
 				                  ToOpenGLType(element.type),
 				                  element.normalize ? GL_TRUE : GL_FALSE,
 				                  layout.GetStride(), 
 				                  (const void*)element.offset);
-			index++;
+			m_VertexBufferIndex++;
 		}
 		m_VertexBuffers.push_back(vertexBuffer);
 	}

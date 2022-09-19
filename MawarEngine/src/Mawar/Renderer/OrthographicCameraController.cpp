@@ -29,10 +29,10 @@ namespace Mawar
 
 		if (m_Rotation)
 		{
-			if (Input::IsKeyPressed(M_KEY_COMMA))
+			if (Input::IsKeyPressed(M_KEY_Q))
 				m_CameraRotation += m_CameraRotationSpeed * ts;
 
-			if (Input::IsKeyPressed(M_KEY_APOSTROPHE))
+			if (Input::IsKeyPressed(M_KEY_E))
 				m_CameraRotation -= m_CameraRotationSpeed * ts;
 
 			m_Camera.SetRotation(m_CameraRotation);

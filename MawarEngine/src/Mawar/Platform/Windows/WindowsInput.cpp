@@ -5,7 +5,7 @@
 
 namespace Mawar
 {
-	Input* Input::s_Instance = new WindowsInput();
+	Scope<Input> Input::s_Instance = CreateScope<WindowsInput>();
 
 	bool WindowsInput::IsKeyPressed_impl(int keycode)
 	{

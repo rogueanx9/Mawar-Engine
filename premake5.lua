@@ -9,6 +9,11 @@ workspace "MawarEngine"
         "Dist"
     }
 	
+	flags
+	{
+		"MultiProcessorCompile"
+	}
+	
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include Dirs array
@@ -73,12 +78,6 @@ project "MawarEngine"
 	
 	filter "system:windows"
 		systemversion "latest"
-		
-		defines
-		{
-			"M_PLATFORM_W10",
-			"M_ENABLE_ASSERT"
-		}
 
 	filter "configurations:Debug"
 		runtime "Debug"
@@ -126,11 +125,6 @@ project "Sandbox"
 	
 	filter "system:windows"
 		systemversion "latest"
-		
-		defines
-		{
-			"M_PLATFORM_W10",
-		}
 
 	filter "configurations:Debug"
 		defines "M_DEBUG"

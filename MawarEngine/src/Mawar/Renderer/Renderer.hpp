@@ -25,7 +25,7 @@ namespace Mawar
 		{
 			glm::mat4 ViewProjectionMatrix;
 		};
-		static SceneData* m_SceneData;
+		static SceneData m_SceneData;
 		static ShaderLibrary* s_ShaderLibrary;
 	};
 }
