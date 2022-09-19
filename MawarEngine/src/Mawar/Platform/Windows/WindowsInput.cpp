@@ -1,6 +1,6 @@
 #include "mpch.hpp"
 #include "WindowsInput.hpp"
-#include "Mawar/Application.hpp"
+#include "Mawar/Core/Application.hpp"
 #include <GLFW/glfw3.h>
 
 namespace Mawar

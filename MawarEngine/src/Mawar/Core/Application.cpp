@@ -1,10 +1,9 @@
 #include "mpch.hpp"
 #include "Application.hpp"
 
-#include "Mawar/Log.hpp"
 #include "Mawar/Renderer/Renderer.hpp"
 
-#include "Mawar/KeyCodes.hpp"
+#include "Mawar/Core/KeyCodes.hpp"
 #include "Mawar/Core/Timestep.hpp"
 
 #include<GLFW/glfw3.h>

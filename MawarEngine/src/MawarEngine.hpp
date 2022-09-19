@@ -1,17 +1,17 @@
 #pragma once
 
-#include "Mawar/Application.hpp"
-#include "Mawar/Layer.hpp"
-#include "Mawar/Log.hpp"
+#include "Mawar/Core/Application.hpp"
+#include "Mawar/Core/Layer.hpp"
+#include "Mawar/Core/Log.hpp"
 #include "Mawar/ImGui/ImGuiLayer.hpp"
 
-#include "Mawar/Input.hpp"
-#include "Mawar/KeyCodes.hpp"
-#include "Mawar/MouseButtonCodes.hpp"
+#include "Mawar/Core/Input.hpp"
+#include "Mawar/Core/KeyCodes.hpp"
+#include "Mawar/Core/MouseButtonCodes.hpp"
 
 #include "Mawar/Core/Timestep.hpp"
 
-#include "Mawar/OrthographicCameraController.hpp"
+#include "Mawar/Renderer/OrthographicCameraController.hpp"
 
 //--- Renderer ---
 #include "Mawar/Renderer/Renderer.hpp"
@@ -26,5 +26,5 @@
 //-------------------
 
 //--- Entry Point ---
-#include "Mawar/EntryPoint.hpp"
+#include "Mawar/Core/EntryPoint.hpp"
 //-------------------

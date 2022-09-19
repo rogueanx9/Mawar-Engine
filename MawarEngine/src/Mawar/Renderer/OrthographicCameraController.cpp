@@ -1,8 +1,8 @@
 #include "mpch.hpp"
 #include "OrthographicCameraController.hpp"
 
-#include "Mawar/Input.hpp"
-#include "Mawar/KeyCodes.hpp"
+#include "Mawar/Core/Input.hpp"
+#include "Mawar/Core/KeyCodes.hpp"
 
 namespace Mawar
 {

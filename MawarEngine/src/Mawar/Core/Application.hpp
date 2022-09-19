@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Mawar/Core.hpp"
+#include "Mawar/Core/Core.hpp"
 #include "Mawar/Events/Event.hpp"
 #include "Mawar/Events/ApplicationEvent.hpp"
-#include "Mawar/Window.hpp"
-#include "Mawar/LayerStack.hpp"
+#include "Mawar/Core/Window.hpp"
+#include "Mawar/Core/LayerStack.hpp"
 #include "Mawar/ImGui/ImGuiLayer.hpp"
 #include "Mawar/Renderer/Shader.hpp"
 #include "Mawar/Renderer/VertexArray.hpp"

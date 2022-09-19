@@ -54,17 +54,38 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Mawar\Application.hpp">
-      <Filter>src\Mawar</Filter>
+    <ClInclude Include="src\Mawar\Core\Application.hpp">
+      <Filter>src\Mawar\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Mawar\Core.hpp">
-      <Filter>src\Mawar</Filter>
+    <ClInclude Include="src\Mawar\Core\Core.hpp">
+      <Filter>src\Mawar\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mawar\Core\EntryPoint.hpp">
+      <Filter>src\Mawar\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mawar\Core\Input.hpp">
+      <Filter>src\Mawar\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mawar\Core\KeyCodes.hpp">
+      <Filter>src\Mawar\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mawar\Core\Layer.hpp">
+      <Filter>src\Mawar\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mawar\Core\LayerStack.hpp">
+      <Filter>src\Mawar\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mawar\Core\Log.hpp">
+      <Filter>src\Mawar\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mawar\Core\MouseButtonCodes.hpp">
+      <Filter>src\Mawar\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Mawar\Core\Timestep.hpp">
       <Filter>src\Mawar\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Mawar\EntryPoint.hpp">
-      <Filter>src\Mawar</Filter>
+    <ClInclude Include="src\Mawar\Core\Window.hpp">
+      <Filter>src\Mawar\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Mawar\Events\ApplicationEvent.hpp">
       <Filter>src\Mawar\Events</Filter>
@@ -80,24 +101,6 @@
     </ClInclude>
     <ClInclude Include="src\Mawar\ImGui\ImGuiLayer.hpp">
       <Filter>src\Mawar\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Mawar\Input.hpp">
-      <Filter>src\Mawar</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Mawar\KeyCodes.hpp">
-      <Filter>src\Mawar</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Mawar\Layer.hpp">
-      <Filter>src\Mawar</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Mawar\LayerStack.hpp">
-      <Filter>src\Mawar</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Mawar\Log.hpp">
-      <Filter>src\Mawar</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Mawar\MouseButtonCodes.hpp">
-      <Filter>src\Mawar</Filter>
     </ClInclude>
     <ClInclude Include="src\Mawar\Platform\OpenGL\OpenGLBuffer.hpp">
       <Filter>src\Mawar\Platform\OpenGL</Filter>
@@ -132,6 +135,9 @@
     <ClInclude Include="src\Mawar\Renderer\OrthographicCamera.hpp">
       <Filter>src\Mawar\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Mawar\Renderer\OrthographicCameraController.hpp">
+      <Filter>src\Mawar\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Mawar\Renderer\RenderCommand.hpp">
       <Filter>src\Mawar\Renderer</Filter>
     </ClInclude>
@@ -149,9 +155,6 @@
     </ClInclude>
     <ClInclude Include="src\Mawar\Renderer\VertexArray.hpp">
       <Filter>src\Mawar\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Mawar\Window.hpp">
-      <Filter>src\Mawar</Filter>
     </ClInclude>
     <ClInclude Include="src\MawarEngine.hpp">
       <Filter>src</Filter>
@@ -1407,26 +1410,25 @@
     <ClInclude Include="vendor\stb\stb_image.h">
       <Filter>vendor\stb</Filter>
     </ClInclude>
-    <ClInclude Include="src\Mawar\OrthographicCameraController.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Mawar\Application.cpp">
-      <Filter>src\Mawar</Filter>
+    <ClCompile Include="src\Mawar\Core\Application.cpp">
+      <Filter>src\Mawar\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mawar\Core\Layer.cpp">
+      <Filter>src\Mawar\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mawar\Core\LayerStack.cpp">
+      <Filter>src\Mawar\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mawar\Core\Log.cpp">
+      <Filter>src\Mawar\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Mawar\ImGui\ImGuiBuild.cpp">
       <Filter>src\Mawar\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Mawar\ImGui\ImGuiLayer.cpp">
       <Filter>src\Mawar\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Mawar\Layer.cpp">
-      <Filter>src\Mawar</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Mawar\LayerStack.cpp">
-      <Filter>src\Mawar</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Mawar\Log.cpp">
-      <Filter>src\Mawar</Filter>
     </ClCompile>
     <ClCompile Include="src\Mawar\Platform\OpenGL\OpenGLBuffer.cpp">
       <Filter>src\Mawar\Platform\OpenGL</Filter>
@@ -1458,6 +1460,9 @@
     <ClCompile Include="src\Mawar\Renderer\OrthographicCamera.cpp">
       <Filter>src\Mawar\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Mawar\Renderer\OrthographicCameraController.cpp">
+      <Filter>src\Mawar\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Mawar\Renderer\RenderCommand.cpp">
       <Filter>src\Mawar\Renderer</Filter>
     </ClCompile>
@@ -1482,6 +1487,5 @@
     <ClCompile Include="vendor\stb\stb_image.cpp">
       <Filter>vendor\stb</Filter>
     </ClCompile>
-    <ClCompile Include="src\Mawar\OrthographicCameraController.cpp" />
   </ItemGroup>
 </Project>

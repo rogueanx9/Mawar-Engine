@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Mawar/Window.hpp"
+#include "Mawar/Core/Window.hpp"
 #include "Mawar/Renderer/GraphicContext.hpp"
 
 #include <GLFW/glfw3.h>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Mawar/Core.hpp"
+#include "Mawar/Core/Core.hpp"
 
 namespace Mawar
 {

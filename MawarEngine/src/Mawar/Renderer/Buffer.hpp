@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cstdint>
-#include "Mawar/Log.hpp"
 
 namespace Mawar
 {

@@ -1,8 +1,7 @@
 #pragma once
 
-#include "Mawar/Core.hpp"
+#include "Mawar/Core/Core.hpp"
 #include "Mawar/Events/Event.hpp"
-#include "Mawar/Log.hpp"
 
 namespace Mawar
 {

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Mawar/Core.hpp"
-#include "Mawar/Layer.hpp"
+#include "Mawar/Core/Core.hpp"
+#include "Mawar/Core/Layer.hpp"
 
 #include "Mawar/Events/ApplicationEvent.hpp"
 #include "Mawar/Events/KeyEvent.hpp"

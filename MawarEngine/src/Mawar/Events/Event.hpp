@@ -1,7 +1,7 @@
 #pragma once
 
 #include "mpch.hpp"
-#include "Mawar/Core.hpp"
+#include "Mawar/Core/Core.hpp"
 
 namespace Mawar
 {

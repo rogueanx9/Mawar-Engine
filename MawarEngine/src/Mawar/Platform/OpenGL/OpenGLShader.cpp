@@ -2,7 +2,6 @@
 #include "OpenGLShader.hpp"
 
 #include <fstream>
-#include "Mawar/Log.hpp"
 #include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>
 

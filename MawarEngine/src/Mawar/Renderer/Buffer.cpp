@@ -1,8 +1,6 @@
 #include "mpch.hpp"
 #include "Buffer.hpp"
 
-#include "Mawar/Log.hpp"
-
 #include "Mawar/Renderer/Renderer.hpp"
 #include "Mawar/Platform/OpenGL/OpenGLBuffer.hpp"
 

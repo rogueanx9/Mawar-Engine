@@ -140,22 +140,22 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Mawar\Application.hpp" />
-    <ClInclude Include="src\Mawar\Core.hpp" />
+    <ClInclude Include="src\Mawar\Core\Application.hpp" />
+    <ClInclude Include="src\Mawar\Core\Core.hpp" />
+    <ClInclude Include="src\Mawar\Core\EntryPoint.hpp" />
+    <ClInclude Include="src\Mawar\Core\Input.hpp" />
+    <ClInclude Include="src\Mawar\Core\KeyCodes.hpp" />
+    <ClInclude Include="src\Mawar\Core\Layer.hpp" />
+    <ClInclude Include="src\Mawar\Core\LayerStack.hpp" />
+    <ClInclude Include="src\Mawar\Core\Log.hpp" />
+    <ClInclude Include="src\Mawar\Core\MouseButtonCodes.hpp" />
     <ClInclude Include="src\Mawar\Core\Timestep.hpp" />
-    <ClInclude Include="src\Mawar\EntryPoint.hpp" />
+    <ClInclude Include="src\Mawar\Core\Window.hpp" />
     <ClInclude Include="src\Mawar\Events\ApplicationEvent.hpp" />
     <ClInclude Include="src\Mawar\Events\Event.hpp" />
     <ClInclude Include="src\Mawar\Events\KeyEvent.hpp" />
     <ClInclude Include="src\Mawar\Events\MouseEvent.hpp" />
     <ClInclude Include="src\Mawar\ImGui\ImGuiLayer.hpp" />
-    <ClInclude Include="src\Mawar\Input.hpp" />
-    <ClInclude Include="src\Mawar\KeyCodes.hpp" />
-    <ClInclude Include="src\Mawar\Layer.hpp" />
-    <ClInclude Include="src\Mawar\LayerStack.hpp" />
-    <ClInclude Include="src\Mawar\Log.hpp" />
-    <ClInclude Include="src\Mawar\MouseButtonCodes.hpp" />
-    <ClInclude Include="src\Mawar\OrthographicCameraController.hpp" />
     <ClInclude Include="src\Mawar\Platform\OpenGL\OpenGLBuffer.hpp" />
     <ClInclude Include="src\Mawar\Platform\OpenGL\OpenGLContext.hpp" />
     <ClInclude Include="src\Mawar\Platform\OpenGL\OpenGLRendererAPI.hpp" />
@@ -167,13 +167,13 @@
     <ClInclude Include="src\Mawar\Renderer\Buffer.hpp" />
     <ClInclude Include="src\Mawar\Renderer\GraphicContext.hpp" />
     <ClInclude Include="src\Mawar\Renderer\OrthographicCamera.hpp" />
+    <ClInclude Include="src\Mawar\Renderer\OrthographicCameraController.hpp" />
     <ClInclude Include="src\Mawar\Renderer\RenderCommand.hpp" />
     <ClInclude Include="src\Mawar\Renderer\Renderer.hpp" />
     <ClInclude Include="src\Mawar\Renderer\RendererAPI.hpp" />
     <ClInclude Include="src\Mawar\Renderer\Shader.hpp" />
     <ClInclude Include="src\Mawar\Renderer\Texture.hpp" />
     <ClInclude Include="src\Mawar\Renderer\VertexArray.hpp" />
-    <ClInclude Include="src\Mawar\Window.hpp" />
     <ClInclude Include="src\MawarEngine.hpp" />
     <ClInclude Include="src\mpch.hpp" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
@@ -594,13 +594,12 @@
     <ClInclude Include="vendor\stb\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Mawar\Application.cpp" />
+    <ClCompile Include="src\Mawar\Core\Application.cpp" />
+    <ClCompile Include="src\Mawar\Core\Layer.cpp" />
+    <ClCompile Include="src\Mawar\Core\LayerStack.cpp" />
+    <ClCompile Include="src\Mawar\Core\Log.cpp" />
     <ClCompile Include="src\Mawar\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Mawar\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\Mawar\Layer.cpp" />
-    <ClCompile Include="src\Mawar\LayerStack.cpp" />
-    <ClCompile Include="src\Mawar\Log.cpp" />
-    <ClCompile Include="src\Mawar\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Mawar\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Mawar\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Mawar\Platform\OpenGL\OpenGLRendererAPI.cpp" />
@@ -611,6 +610,7 @@
     <ClCompile Include="src\Mawar\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Mawar\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Mawar\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="src\Mawar\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Mawar\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Mawar\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Mawar\Renderer\RendererAPI.cpp" />

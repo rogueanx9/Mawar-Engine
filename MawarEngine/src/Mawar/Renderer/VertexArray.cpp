@@ -1,7 +1,6 @@
 #include "mpch.hpp"
 #include "VertexArray.hpp"
 
-#include "Mawar/Log.hpp"
 #include "Mawar/Renderer/Renderer.hpp"
 #include "Mawar/Platform/OpenGL/OpenGLVertexArray.hpp"
 
