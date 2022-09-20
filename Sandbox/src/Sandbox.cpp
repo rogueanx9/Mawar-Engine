@@ -1,9 +1,12 @@
 #include <MawarEngine.hpp>
+#include "Mawar/Core/EntryPoint.hpp"
 
 #include "imgui.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 #include "Mawar/Platform/OpenGL/OpenGLShader.hpp"
+
+#include "Sandbox2D.hpp"
 
 class LayerExample : public Mawar::Layer
 {
@@ -14,8 +17,8 @@ public:
 		/// <summary>
 		/// OpenGL Rendering Object
 		/// </summary>
-		m_VertexArray.reset(Mawar::VertexArray::Create());
-		m_SquareVertexArray.reset(Mawar::VertexArray::Create());
+		m_VertexArray = Mawar::VertexArray::Create();
+		m_SquareVertexArray = Mawar::VertexArray::Create();
 
 		/// <summary>
 		/// Triangle
@@ -28,7 +31,7 @@ public:
 			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 		Mawar::Ref<Mawar::VertexBuffer> triangleVB;
-		triangleVB.reset(Mawar::VertexBuffer::Create(vertices, sizeof(vertices)));
+		triangleVB = Mawar::VertexBuffer::Create(vertices, sizeof(vertices));
 		triangleVB->SetLayout({
 			{Mawar::ShaderDataType::Float3, "a_Position"},
 			{Mawar::ShaderDataType::Float2, "a_TexCoord"}
@@ -37,7 +40,7 @@ public:
 
 		unsigned int indices[6] = { 0,1,2,2,3,0 };
 		Mawar::Ref<Mawar::IndexBuffer> triangleIB;
-		triangleIB.reset(Mawar::IndexBuffer::Create(indices, 6));
+		triangleIB = Mawar::IndexBuffer::Create(indices, 6);
 		m_VertexArray->SetIndexBuffer(triangleIB);
 
 		/// <summary>
@@ -51,7 +54,7 @@ public:
 			-0.75f,  0.75f, 0.0f, 0.0f, 1.0f
 		};
 		Mawar::Ref<Mawar::VertexBuffer> squareVB;
-		squareVB.reset(Mawar::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		squareVB = Mawar::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
 		squareVB->SetLayout({
 			{Mawar::ShaderDataType::Float3, "a_Position"},
 			{Mawar::ShaderDataType::Float2, "a_TexCoord"}
@@ -60,7 +63,7 @@ public:
 
 		unsigned int squareIndices[] = { 0,1,2,2,3,0 };
 		Mawar::Ref<Mawar::IndexBuffer> squareIB;
-		squareIB.reset(Mawar::IndexBuffer::Create(squareIndices, 6));
+		squareIB = Mawar::IndexBuffer::Create(squareIndices, 6);
 		m_SquareVertexArray->SetIndexBuffer(squareIB);
 
 		auto m_Shader = Mawar::Renderer::GetShaderLibrary()->Load("assets/shaders/Texture.glsl");
@@ -115,18 +118,6 @@ public:
 	{
 		//M_TRACE("Delta time: {0}s {1}ms", ts.GetSecond(), ts.GetMiliSecond());
 		m_CameraController.OnUpdate(ts);
-
-		if (Mawar::Input::IsKeyPressed(M_KEY_W))
-			m_TransformPosition.y += m_TransformMoveSpeed * ts;
-
-		if (Mawar::Input::IsKeyPressed(M_KEY_S))
-			m_TransformPosition.y -= m_TransformMoveSpeed * ts;
-
-		if (Mawar::Input::IsKeyPressed(M_KEY_A))
-			m_TransformPosition.x -= m_TransformMoveSpeed * ts;
-
-		if (Mawar::Input::IsKeyPressed(M_KEY_D))
-			m_TransformPosition.x += m_TransformMoveSpeed * ts;
 
 		Mawar::RenderCommand::SetClearColor({ ClearColor.x * ClearColor.w, ClearColor.y * ClearColor.w, ClearColor.z * ClearColor.w, ClearColor.w });
 		Mawar::RenderCommand::Clear();
@@ -195,7 +186,8 @@ class Sandbox : public Mawar::Application
 public:
 	Sandbox()
 	{
-		PushLayer(new LayerExample());
+		//PushLayer(new LayerExample());
+		PushLayer(new Sandbox2D());
 	}
 	~Sandbox(){}
 };

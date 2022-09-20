@@ -24,7 +24,3 @@
 
 #include "Mawar/Renderer/OrthographicCamera.hpp"
 //-------------------
-
-//--- Entry Point ---
-#include "Mawar/Core/EntryPoint.hpp"
-//-------------------
