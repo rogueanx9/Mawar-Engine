@@ -1,16 +1,18 @@
 #include "mpch.hpp"
 #include "Renderer.hpp"
 
+#include "Mawar/Renderer/Renderer2D.hpp"
 #include "Mawar/Platform/OpenGL/OpenGLShader.hpp"
 
 namespace Mawar
 {
     Renderer::SceneData Renderer::m_SceneData;
-    ShaderLibrary* Renderer::s_ShaderLibrary = new ShaderLibrary;
+    Ref<ShaderLibrary> Renderer::s_ShaderLibrary = CreateRef<ShaderLibrary>();
 
     void Renderer::Init()
     {
         RenderCommand::Init();
+        Renderer2D::Init();
     }
 
     void Renderer::BeginScene(const OrthographicCamera& camera)

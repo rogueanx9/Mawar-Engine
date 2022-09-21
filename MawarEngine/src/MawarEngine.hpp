@@ -15,6 +15,7 @@
 
 //--- Renderer ---
 #include "Mawar/Renderer/Renderer.hpp"
+#include "Mawar/Renderer/Renderer2D.hpp"
 #include "Mawar/Renderer/RenderCommand.hpp"
 
 #include "Mawar/Renderer/Shader.hpp"
