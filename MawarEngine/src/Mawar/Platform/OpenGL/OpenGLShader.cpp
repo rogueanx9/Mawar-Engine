@@ -19,6 +19,8 @@ namespace Mawar
 
 	OpenGLShader::OpenGLShader(const std::string& filepath)
 	{
+		M_PROFILE_FUNCTION();
+
 		std::string source = ReadFile(filepath);
 		auto shaderSources = PreProcess(source);
 		Compile(shaderSources);
@@ -31,9 +33,11 @@ namespace Mawar
 		m_Name = filepath.substr(lastSlash, lastDot - lastSlash);
 	}
 
-	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource)
+	OpenGLShader::OpenGLShader(const std::string& name, std::string_view vertexSource, std::string_view fragmentSource)
 		: m_Name(name)
 	{
+		M_PROFILE_FUNCTION();
+
 		std::unordered_map<GLenum, std::string> shaderSources;
 		shaderSources[GL_VERTEX_SHADER] = vertexSource;
 		shaderSources[GL_FRAGMENT_SHADER] = fragmentSource;
@@ -42,36 +46,50 @@ namespace Mawar
 
 	OpenGLShader::~OpenGLShader()
 	{
+		M_PROFILE_FUNCTION();
+
 		glDeleteProgram(m_RendererID);
 	}
 
 	void OpenGLShader::Bind() const
 	{
+		M_PROFILE_FUNCTION();
+
 		glUseProgram(m_RendererID);
 	}
 
 	void OpenGLShader::Unbind() const
 	{
+		M_PROFILE_FUNCTION();
+
 		glUseProgram(0);
 	}
 
 	void OpenGLShader::SetInt(const std::string& name, int value)
 	{
+		M_PROFILE_FUNCTION();
+
 		UploadUniformInt(name, value);
 	}
 
 	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value)
 	{
+		M_PROFILE_FUNCTION();
+
 		UploadUniformFloat3(name, value);
 	}
 
 	void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& value)
 	{
+		M_PROFILE_FUNCTION();
+
 		UploadUniformFloat4(name, value);
 	}
 
 	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value)
 	{
+		M_PROFILE_FUNCTION();
+
 		UploadUniformMat4f(name, value);
 	}
 
@@ -119,6 +137,8 @@ namespace Mawar
 
 	std::string OpenGLShader::ReadFile(const std::string& filepath)
 	{
+		M_PROFILE_FUNCTION();
+
 		std::string result;
 		std::ifstream in(filepath, std::ios::in | std::ios::binary);
 
@@ -140,6 +160,8 @@ namespace Mawar
 
 	std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string& source)
 	{
+		M_PROFILE_FUNCTION();
+
 		std::unordered_map<GLenum, std::string> shaderSources;
 
 		const char* typeToken = "#type";
@@ -165,6 +187,8 @@ namespace Mawar
 
 	void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
+		M_PROFILE_FUNCTION();
+
 		uint32_t program = glCreateProgram();
 
 		M_CORE_ASSERT(shaderSources.size() <= 2, "You cannot input more than 2 shaders.");

@@ -22,22 +22,30 @@ namespace Mawar
 
 	WindowsWindow::WindowsWindow(const WindowProps& props)
 	{
+		M_PROFILE_FUNCTION();
+
 		Init(props);
 	}
 
 	WindowsWindow::~WindowsWindow()
 	{
+		M_PROFILE_FUNCTION();
+
 		Shutdown();
 	}
 
 	void WindowsWindow::OnUpdate()
 	{
+		M_PROFILE_FUNCTION();
+
 		glfwPollEvents();
 		m_Context->SwapBuffers();
 	}
 
 	void WindowsWindow::SetVSync(bool enabled)
 	{
+		M_PROFILE_FUNCTION();
+
 		if (enabled)
 			glfwSwapInterval(1);
 		else
@@ -54,6 +62,8 @@ namespace Mawar
 
 	void WindowsWindow::Init(const WindowProps& props)
 	{
+		M_PROFILE_FUNCTION();
+
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
@@ -62,6 +72,8 @@ namespace Mawar
 
 		if (!s_GLFWInitialized)
 		{
+			M_PROFILE_SCOPE("glfwInit");
+
 			int success = glfwInit();
 			M_CORE_ASSERT(success, "Couldn't initialize GLFW.");
 			glfwSetErrorCallback(GLFWErrorCallback);
@@ -69,9 +81,12 @@ namespace Mawar
 		}
 		M_CORE_TRACE("GLFW Initialized");
 
-		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, props.Title.c_str(), nullptr, nullptr);
-		M_CORE_TRACE("Window Created");
-		M_CORE_ASSERT(m_Window, "Couldn't create window.");
+		{
+			M_PROFILE_SCOPE("glfwCreateWindow");
+			m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, props.Title.c_str(), nullptr, nullptr);
+			M_CORE_TRACE("Window Created");
+			M_CORE_ASSERT(m_Window, "Couldn't create window.");
+		}
 
 		m_Context = CreateScope<OpenGLContext>(m_Window);
 		M_CORE_TRACE("Context Created");

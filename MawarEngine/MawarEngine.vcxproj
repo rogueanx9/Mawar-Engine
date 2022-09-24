@@ -155,6 +155,7 @@
     <ClInclude Include="src\Mawar\Core\MouseButtonCodes.hpp" />
     <ClInclude Include="src\Mawar\Core\Timestep.hpp" />
     <ClInclude Include="src\Mawar\Core\Window.hpp" />
+    <ClInclude Include="src\Mawar\Debug\Instrumentor.hpp" />
     <ClInclude Include="src\Mawar\Events\ApplicationEvent.hpp" />
     <ClInclude Include="src\Mawar\Events\Event.hpp" />
     <ClInclude Include="src\Mawar\Events\KeyEvent.hpp" />

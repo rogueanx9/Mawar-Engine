@@ -8,11 +8,15 @@ namespace Mawar
 {
 	OpenGLContext::OpenGLContext(GLFWwindow* window) : m_Window(window)
 	{
+		M_PROFILE_FUNCTION();
+
 		M_CORE_ASSERT(window, "Window Handle is null.")
 	}
 
 	void OpenGLContext::Init()
 	{
+		M_PROFILE_FUNCTION();
+
 		glfwMakeContextCurrent(m_Window);
 		M_CORE_TRACE("Make Context");
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
@@ -26,6 +30,8 @@ namespace Mawar
 	}
 	void OpenGLContext::SwapBuffers()
 	{
+		M_PROFILE_FUNCTION();
+
 		glfwSwapBuffers(m_Window);
 	}
 }

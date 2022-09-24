@@ -23,7 +23,7 @@ namespace Mawar
 		virtual void SetMat4(const std::string& name, const glm::mat4& value) = 0;
 
 		static Ref<Shader> Create(const std::string& filepath);
-		static Ref<Shader> Create(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource);
+		static Ref<Shader> Create(const std::string& name, std::string_view vertexSource, std::string_view fragmentSource);
 	};
 
 	class ShaderLibrary

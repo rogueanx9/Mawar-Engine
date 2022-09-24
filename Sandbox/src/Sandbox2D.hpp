@@ -24,4 +24,11 @@ private:
 
 	Mawar::OrthographicCameraController m_CameraController;
 	Mawar::Ref<Mawar::VertexArray> m_SquareVertexArray;
+
+	/*struct ProfileResult
+	{
+		const char* name;
+		float duration;
+	};*/
+	//std::vector<ProfileResult> m_ProfileResults;
 };

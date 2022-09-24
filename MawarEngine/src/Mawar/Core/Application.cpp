@@ -16,6 +16,7 @@ namespace Mawar
 
 	Application::Application()
 	{
+		M_PROFILE_FUNCTION();
 		/// <summary>
 		/// Initialization
 		/// </summary>
@@ -31,10 +32,15 @@ namespace Mawar
 		PushOverlay(m_ImGuiLayer);
 	}
 
-	Application::~Application() {}
+	Application::~Application()
+	{
+		M_PROFILE_FUNCTION();
+	}
 
 	void Application::OnEvent(Event& e)
 	{
+		M_PROFILE_FUNCTION();
+
 		EventDispatcher dispatcher{ e };
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClosed));
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
@@ -49,22 +55,29 @@ namespace Mawar
 
 	void Application::Run()
 	{
+		M_PROFILE_FUNCTION();
+
 		while (m_Running)
 		{
+			M_PROFILE_SCOPE("RUN LOOP");
 			float time = glfwGetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
 			if (!m_Minimized)
 			{
+				M_PROFILE_SCOPE("LayerStack OnUpdate");
 				for (Layer* layer : m_LayerStack)
 					layer->OnUpdate(timestep);
 			}
 
-			m_ImGuiLayer->Begin();
-			for (Layer* layer : m_LayerStack)
-				layer->OnImGuiRender();
-			m_ImGuiLayer->End();
+			{
+				M_PROFILE_SCOPE("OnImGui Render");
+				m_ImGuiLayer->Begin();
+				for (Layer* layer : m_LayerStack)
+					layer->OnImGuiRender();
+				m_ImGuiLayer->End();
+			}
 
 			// Main Window Update
 			m_Window->OnUpdate();
@@ -73,24 +86,32 @@ namespace Mawar
 
 	void Application::PushLayer(Layer* layer)
 	{
+		M_PROFILE_FUNCTION();
+
 		m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* layer)
 	{
+		M_PROFILE_FUNCTION();
+
 		m_LayerStack.PushOverlay(layer);
 		layer->OnAttach();
 	}
 
 	bool Application::OnWindowClosed(WindowCloseEvent& e)
 	{
+		M_PROFILE_FUNCTION();
+
 		m_Running = false;
 		return true;
 	}
 
 	bool Application::OnWindowResize(WindowResizeEvent& e)
 	{
+		M_PROFILE_FUNCTION();
+
 		if (e.GetWidth() == 0 || e.GetHeight() == 0)
 		{
 			m_Minimized = true;

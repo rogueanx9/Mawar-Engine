@@ -11,6 +11,8 @@ namespace Mawar
 
     void Renderer::Init()
     {
+        M_PROFILE_FUNCTION();
+
         RenderCommand::Init();
         Renderer2D::Init();
     }
@@ -26,6 +28,8 @@ namespace Mawar
 
     void Renderer::Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform)
     {
+        M_PROFILE_FUNCTION();
+
         shader->Bind();
         std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4f("u_ViewProjection", m_SceneData.ViewProjectionMatrix);
         std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4f("u_Transform", transform);
@@ -36,6 +40,8 @@ namespace Mawar
 
     void Renderer::OnWindowResize(uint32_t width, uint32_t height)
     {
+        M_PROFILE_FUNCTION();
+
         RenderCommand::OnWindowResize(0, 0, width, height);
     }
 }

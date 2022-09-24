@@ -1411,6 +1411,7 @@
       <Filter>vendor\stb</Filter>
     </ClInclude>
     <ClInclude Include="src\Mawar\Renderer\Renderer2D.hpp" />
+    <ClInclude Include="src\Mawar\Debug\Instrumentor.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Mawar\Core\Application.cpp">

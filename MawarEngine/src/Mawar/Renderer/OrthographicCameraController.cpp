@@ -15,6 +15,8 @@ namespace Mawar
 
 	void OrthographicCameraController::OnUpdate(Timestep ts)
 	{
+		M_PROFILE_FUNCTION();
+
 		if (Input::IsKeyPressed(M_KEY_UP))
 			m_CameraPosition.y += m_CameraTranslationSpeed * ts;
 
@@ -44,6 +46,8 @@ namespace Mawar
 
 	void OrthographicCameraController::OnEvent(Event& e)
 	{
+		M_PROFILE_FUNCTION();
+
 		EventDispatcher dispatcher{ e };
 		dispatcher.Dispatch<MouseScrolledEvent>(M_BIND_FN(OrthographicCameraController::OnMouseScrolled));
 		dispatcher.Dispatch<WindowResizeEvent>(M_BIND_FN(OrthographicCameraController::OnWindowResize));

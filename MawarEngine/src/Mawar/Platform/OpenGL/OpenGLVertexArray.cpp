@@ -29,26 +29,36 @@ namespace Mawar
 
 	OpenGLVertexArray::OpenGLVertexArray()
 	{
+		M_PROFILE_FUNCTION();
+
 		glCreateVertexArrays(1, &m_RendererID);
 	}
 
 	OpenGLVertexArray::~OpenGLVertexArray()
 	{
+		M_PROFILE_FUNCTION();
+
 		glDeleteVertexArrays(1, &m_RendererID);
 	}
 
 	void OpenGLVertexArray::Bind() const
 	{
+		M_PROFILE_FUNCTION();
+
 		glBindVertexArray(m_RendererID);
 	}
 
 	void OpenGLVertexArray::Unind() const
 	{
+		M_PROFILE_FUNCTION();
+
 		glBindVertexArray(0);
 	}
 
 	void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
 	{
+		M_PROFILE_FUNCTION();
+
 		M_CORE_ASSERT(vertexBuffer->GetLayout().GetElement().size(), "VertexBuffer has no layout!");
 
 		glBindVertexArray(m_RendererID);
@@ -71,6 +81,8 @@ namespace Mawar
 
 	void OpenGLVertexArray::SetIndexBuffer(Ref<IndexBuffer> indexBuffer)
 	{
+		M_PROFILE_FUNCTION();
+
 		glBindVertexArray(m_RendererID);
 		indexBuffer->Bind();
 		m_IndexBuffer = indexBuffer;
