@@ -11,19 +11,7 @@ namespace Mawar
 	static ImVec4 m_clear_color = { 0.2f, 0.2f, 0.2f, 1.0f };
 
 	ImGuiLayer::ImGuiLayer()
-		: Layer("ImGui Layer")
-	{
-	}
-
-	ImGuiLayer::~ImGuiLayer()
-	{
-		// Cleanup
-		ImGui_ImplOpenGL3_Shutdown();
-		ImGui_ImplGlfw_Shutdown();
-		ImGui::DestroyContext();
-	}
-
-	void ImGuiLayer::OnAttach()
+		: Layer("Debug Layer")
 	{
 		ImGui::CreateContext();
 		ImGui::StyleColorsDark();
@@ -43,6 +31,18 @@ namespace Mawar
 		GLFWwindow* window = (GLFWwindow*)Application::Get().GetWindow().GetNativeWindow();
 		ImGui_ImplGlfw_InitForOpenGL(window, true);
 		ImGui_ImplOpenGL3_Init("#version 410");
+	}
+
+	ImGuiLayer::~ImGuiLayer()
+	{
+		// Cleanup
+		ImGui_ImplOpenGL3_Shutdown();
+		ImGui_ImplGlfw_Shutdown();
+		ImGui::DestroyContext();
+	}
+
+	void ImGuiLayer::OnAttach()
+	{
 	}
 
 	void ImGuiLayer::OnDetach()
@@ -114,19 +114,12 @@ namespace Mawar
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-		/*
-		 * int display_w, display_h;
-		 * glfwGetFramebufferSize(window, &display_w, &display_h);
-		 * glViewport(0, 0, display_w, display_h);
-		 */
-
 		// Update and Render additional Platform Windows
 		// (Platform functions may change the current OpenGL context, so we save/restore it to make it easier to paste this code elsewhere.
 		//  For this specific demo app we could also call glfwMakeContextCurrent(window) directly)
 		ImGuiIO& io = ImGui::GetIO();
 		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 		{
-			//GLFWwindow* backup_current_context = glfwGetCurrentContext();
 			ImGui::UpdatePlatformWindows();
 			ImGui::RenderPlatformWindowsDefault();
 			glfwMakeContextCurrent(window);

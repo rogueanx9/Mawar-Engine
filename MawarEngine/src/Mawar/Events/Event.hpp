@@ -48,9 +48,6 @@ namespace Mawar
 
 	class EventDispatcher
 	{
-		//template <typename T>
-		//using EventFn = std::function<bool(T&)>;
-
 	public:
 		EventDispatcher(Event& e) : m_Event(e) {}
 

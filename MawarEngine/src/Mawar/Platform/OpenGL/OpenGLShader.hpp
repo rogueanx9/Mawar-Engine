@@ -18,6 +18,11 @@ namespace Mawar
 		void Unbind() const override;
 		std::string GetName() const override { return m_Name; }
 
+		void SetInt(const std::string& name, int value) override;
+		void SetFloat3(const std::string& name, const glm::vec3& value) override;
+		void SetFloat4(const std::string& name, const glm::vec4& value) override;
+		void SetMat4(const std::string& name, const glm::mat4& matrix) override;
+
 		void UploadUniformInt(const std::string& name, int vector);
 
 		void UploadUniformFloat(const std::string& name, float vector);

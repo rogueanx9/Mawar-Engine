@@ -1,11 +1,12 @@
 #include "Sandbox2D.hpp"
 
-#include "Mawar/Platform/OpenGL/OpenGLShader.hpp"
 #include <glm/gtc/type_ptr.hpp>
 
 Sandbox2D::Sandbox2D()
 	: Layer("Sandbox 2D"), m_CameraController(4 / 3)
 {
+	m_Texture = Mawar::Texture2D::Create("assets/images/bird.png");
+	m_CatTexture = Mawar::Texture2D::Create("assets/images/cat.png");
 }
 
 Sandbox2D::~Sandbox2D()
@@ -29,14 +30,11 @@ void Sandbox2D::OnUpdate(Mawar::Timestep ts)
 	Mawar::RenderCommand::Clear();
 
 	Mawar::Renderer2D::BeginScene(m_CameraController.GetCamera());
-
-	Mawar::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f,1.0f }, m_Color);
-
+	Mawar::Renderer2D::DrawQuad({ -0.3f, -0.5f }, { 0.5f,0.5f }, m_Color);
+	Mawar::Renderer2D::DrawQuad({ -0.1f, -0.8f }, { 0.5f,0.5f }, glm::vec4{0.2f, 0.8f, 0.3f, 1.0f});
+	Mawar::Renderer2D::DrawQuad({ 0.3f, 0.5f, -0.1f }, { 5.0f,5.0f }, m_Texture);
+	Mawar::Renderer2D::DrawQuad({ 0.3f, 0.5f }, { 1.0f,1.0f }, m_CatColor, m_CatTexture);
 	Mawar::Renderer2D::EndScene();
-
-	// auto m_Shader = Mawar::Renderer::GetShaderLibrary()->Get("FlatShader"); // TODO: ShaderLib for Renderer2D
-	//std::dynamic_pointer_cast<Mawar::OpenGLShader>(m_Shader)->Bind();
-	//std::dynamic_pointer_cast<Mawar::OpenGLShader>(m_Shader)->UploadUniformFloat4("u_Color", m_Color);
 }
 
 void Sandbox2D::OnImGuiRender()
@@ -44,6 +42,7 @@ void Sandbox2D::OnImGuiRender()
 	ImGui::Begin("Sandbox 2D");
 	ImGui::ColorEdit3("Clear Color", glm::value_ptr(m_ClearColor));
 	ImGui::ColorEdit4("Square Color", glm::value_ptr(m_Color));
+	ImGui::ColorEdit4("Cat Tint Color", glm::value_ptr(m_CatColor));
 	ImGui::End();
 }
 
