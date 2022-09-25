@@ -9,20 +9,19 @@ namespace Mawar
 {
 	struct Renderer2DStorage
 	{
-		Ref<VertexArray> quadVertexArray;
+		Ref<VertexArray> quadVertexArray = VertexArray::Create();
 		Ref<Shader> textureShader = Shader::Create("assets/shaders/Texture.glsl");
 
 		uint32_t white_data = 0xffffffff;
 		Ref<Texture2D> whiteTexture = Texture2D::Create(1, 1, &white_data);
 	};
-	static Renderer2DStorage* s_Data;
+	static Renderer2DStorage* s_Data = nullptr;
 
 	void Renderer2D::Init()
 	{
 		M_PROFILE_FUNCTION();
 
 		s_Data = new Renderer2DStorage();
-		s_Data->quadVertexArray = VertexArray::Create();
 
 		float squareVertices[5 * 4] =
 		{
