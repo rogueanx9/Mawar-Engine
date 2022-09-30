@@ -61,7 +61,7 @@ void Sandbox2D::OnUpdate(Mawar::Timestep ts)
 			tileSquare.rotation = glm::radians((float)i * j * 5);
 			Mawar::Renderer2D::DrawQuad(tileSquare);
 		}
-		Mawar::Renderer2D::DrawQuad(Mawar::QuadProps());
+		Mawar::Renderer2D::DrawQuad(Mawar::Renderer2D::QuadProps());
 		Mawar::Renderer2D::EndScene();
 	}
 }
