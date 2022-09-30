@@ -11,13 +11,18 @@ namespace Mawar
 	public:
 		struct QuadProps
 		{
-			float x = 0.0f, y = 0.0f, z = 0.0f; // Position
-			float scaleX = 1.0f, scaleY = 1.0f; // Scale
-			float r = 1.0f, g = 1.0f, b = 1.0f, a = 1.0f; // Color
+			struct Position { float x = 0.0f, y = 0.0f, z = 0.0f; };
+			struct Scale { float x = 1.0f, y = 1.0f; };
+			struct Color { float r = 1.0f, g = 1.0f, b = 1.0f, a = 1.0f; };
+
+			Position position;
+			Scale scale;
+			Color color;
 			float rotation = 0.0f; // radians
 			float tilingFactor = 1.0f;
 			Ref<Texture2D> texture;
 		};
+
 	public:
 		static void Init();
 		static void Shutdown();

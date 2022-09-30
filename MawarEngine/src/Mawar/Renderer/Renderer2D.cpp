@@ -70,13 +70,13 @@ namespace Mawar
 		M_PROFILE_FUNCTION();
 
 		s_Data->textureShader->SetFloat("u_TilingFactor", quadProps.tilingFactor);
-		s_Data->textureShader->SetFloat4("u_Color", { quadProps.r, quadProps.g, quadProps.b, quadProps.a });
+		s_Data->textureShader->SetFloat4("u_Color", { quadProps.color.r, quadProps.color.g, quadProps.color.b, quadProps.color.a });
 		quadProps.texture ? quadProps.texture->Bind() : s_Data->whiteTexture->Bind();
 
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), { quadProps.x, quadProps.y, quadProps.z });
-		transform = quadProps.scaleX == 1.0f && quadProps.scaleY == 1.0f ?
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), { quadProps.position.x, quadProps.position.y, quadProps.position.z });
+		transform = quadProps.scale.x == 1.0f && quadProps.scale.y == 1.0f ?
 			transform : 
-			transform * glm::scale(glm::mat4(1.0f), { quadProps.scaleX, quadProps.scaleY, 1.0f });
+			transform * glm::scale(glm::mat4(1.0f), { quadProps.scale.x, quadProps.scale.y, 1.0f });
 		transform = quadProps.rotation == 0.0f ? 
 			transform : 
 			transform * glm::rotate(glm::mat4(1.0f), quadProps.rotation, { 0.0f, 0.0f, 1.0f });
@@ -92,17 +92,17 @@ namespace Mawar
 		M_PROFILE_FUNCTION();
 
 		QuadProps quadProps;
-		quadProps.x = position.x;
-		quadProps.y = position.y;
-		quadProps.z = position.z;
+		quadProps.position.x = position.x;
+		quadProps.position.y = position.y;
+		quadProps.position.z = position.z;
 
-		quadProps.scaleX = size.x;
-		quadProps.scaleY = size.y;
+		quadProps.scale.x = size.x;
+		quadProps.scale.y = size.y;
 
-		quadProps.r = color.x;
-		quadProps.g = color.y;
-		quadProps.b = color.z;
-		quadProps.a = color.w;
+		quadProps.color.r = color.x;
+		quadProps.color.g = color.y;
+		quadProps.color.b = color.z;
+		quadProps.color.a = color.w;
 
 		quadProps.texture = texture;
 		DrawQuad(quadProps);
