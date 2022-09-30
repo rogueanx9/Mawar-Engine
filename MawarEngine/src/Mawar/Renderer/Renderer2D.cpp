@@ -65,19 +65,47 @@ namespace Mawar
 		M_PROFILE_FUNCTION();
 	}
 
+	void Renderer2D::DrawQuad(const QuadProps& quadProps)
+	{
+		M_PROFILE_FUNCTION();
+
+		s_Data->textureShader->SetFloat("u_TilingFactor", quadProps.tilingFactor);
+		s_Data->textureShader->SetFloat4("u_Color", { quadProps.r, quadProps.g, quadProps.b, quadProps.a });
+		quadProps.texture ? quadProps.texture->Bind() : s_Data->whiteTexture->Bind();
+
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), { quadProps.x, quadProps.y, quadProps.z });
+		transform = quadProps.scaleX == 1.0f && quadProps.scaleY == 1.0f ?
+			transform : 
+			transform * glm::scale(glm::mat4(1.0f), { quadProps.scaleX, quadProps.scaleY, 1.0f });
+		transform = quadProps.rotation == 0.0f ? 
+			transform : 
+			transform * glm::rotate(glm::mat4(1.0f), quadProps.rotation, { 0.0f, 0.0f, 1.0f });
+		s_Data->textureShader->SetMat4("u_Transform", transform);
+
+		s_Data->quadVertexArray->Bind();
+		RenderCommand::DrawIndexed(s_Data->quadVertexArray);
+	}
+
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
 		                      const glm::vec4& color, const Ref<Texture2D>& texture)
 	{
 		M_PROFILE_FUNCTION();
 
-		s_Data->textureShader->SetFloat4("u_Color", color);
-		texture->Bind();
+		QuadProps quadProps;
+		quadProps.x = position.x;
+		quadProps.y = position.y;
+		quadProps.z = position.z;
 
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
-		s_Data->textureShader->SetMat4("u_Transform", transform);
+		quadProps.scaleX = size.x;
+		quadProps.scaleY = size.y;
 
-		s_Data->quadVertexArray->Bind();
-		RenderCommand::DrawIndexed(s_Data->quadVertexArray);
+		quadProps.r = color.x;
+		quadProps.g = color.y;
+		quadProps.b = color.z;
+		quadProps.a = color.w;
+
+		quadProps.texture = texture;
+		DrawQuad(quadProps);
 	}
 
 	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size,

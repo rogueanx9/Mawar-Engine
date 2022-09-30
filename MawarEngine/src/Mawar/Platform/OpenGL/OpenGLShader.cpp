@@ -72,6 +72,11 @@ namespace Mawar
 		UploadUniformInt(name, value);
 	}
 
+	void OpenGLShader::SetFloat(const std::string& name, float value)
+	{
+		UploadUniformFloat(name, value);
+	}
+
 	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value)
 	{
 		M_PROFILE_FUNCTION();
