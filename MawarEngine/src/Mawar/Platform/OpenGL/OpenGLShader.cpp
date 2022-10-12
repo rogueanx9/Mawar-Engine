@@ -72,6 +72,13 @@ namespace Mawar
 		UploadUniformInt(name, value);
 	}
 
+	void OpenGLShader::SetIntArray(const std::string& name, uint32_t count, int* value)
+	{
+		M_PROFILE_FUNCTION();
+
+		UploadUniformIntArray(name, count, value);
+	}
+
 	void OpenGLShader::SetFloat(const std::string& name, float value)
 	{
 		UploadUniformFloat(name, value);
@@ -102,6 +109,12 @@ namespace Mawar
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform1i(location, value);
+	}
+
+	void OpenGLShader::UploadUniformIntArray(const std::string& name, uint32_t count, int* value)
+	{
+		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+		glUniform1iv(location, count, value);
 	}
 
 	void OpenGLShader::UploadUniformFloat(const std::string& name, float value)

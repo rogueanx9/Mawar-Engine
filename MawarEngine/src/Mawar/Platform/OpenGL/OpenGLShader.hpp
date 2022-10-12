@@ -19,12 +19,15 @@ namespace Mawar
 		std::string GetName() const override { return m_Name; }
 
 		void SetInt(const std::string& name, int value) override;
+		void SetIntArray(const std::string& name, uint32_t count, int* value) override;
+
 		void SetFloat(const std::string& name, float value) override;
 		void SetFloat3(const std::string& name, const glm::vec3& value) override;
 		void SetFloat4(const std::string& name, const glm::vec4& value) override;
 		void SetMat4(const std::string& name, const glm::mat4& matrix) override;
 
 		void UploadUniformInt(const std::string& name, int vector);
+		void UploadUniformIntArray(const std::string& name, uint32_t count, int* value);
 
 		void UploadUniformFloat(const std::string& name, float vector);
 		void UploadUniformFloat2(const std::string& name, const glm::vec2& vector);

@@ -52,6 +52,7 @@ void Sandbox2D::OnUpdate(Mawar::Timestep ts)
 		Mawar::Renderer2D::DrawQuad({ -0.1f, -0.8f }, { 0.5f,0.5f }, glm::vec4{ 0.2f, 0.8f, 0.3f, 1.0f });
 		Mawar::Renderer2D::DrawQuad({ 0.3f, 0.5f, -0.1f }, { 5.0f,5.0f }, m_Texture);
 		Mawar::Renderer2D::DrawQuad({ 0.3f, 0.5f }, { 1.0f,1.0f }, m_CatColor, m_CatTexture);
+		Mawar::Renderer2D::DrawQuad({ 0.3f, 0.5f }, { 4.0f,4.0f }, m_CatColor, m_CatTexture);
 		for (int i = 0; i < 5; i++)
 			for (int j = 0;j<5;j++)
 		{
