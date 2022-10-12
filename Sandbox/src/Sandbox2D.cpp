@@ -47,18 +47,19 @@ void Sandbox2D::OnUpdate(Mawar::Timestep ts)
 
 	{
 		M_PROFILE_SCOPE("Render Draw");
+
 		Mawar::Renderer2D::BeginScene(m_CameraController.GetCamera());
 		Mawar::Renderer2D::DrawQuad({ -0.3f, -0.5f }, { 0.5f,0.5f }, m_Color);
 		Mawar::Renderer2D::DrawQuad({ -0.1f, -0.8f }, { 0.5f,0.5f }, glm::vec4{ 0.2f, 0.8f, 0.3f, 1.0f });
 		Mawar::Renderer2D::DrawQuad({ 0.3f, 0.5f, -0.1f }, { 5.0f,5.0f }, m_Texture);
 		Mawar::Renderer2D::DrawQuad({ 0.3f, 0.5f }, { 1.0f,1.0f }, m_CatColor, m_CatTexture);
-		Mawar::Renderer2D::DrawQuad({ 0.3f, 0.5f }, { 4.0f,4.0f }, m_CatColor, m_CatTexture);
-		for (int i = 0; i < 5; i++)
-			for (int j = 0;j<5;j++)
+		for (int i = 0; i < 20; i++)
+			for (int j = 0;j < 20;j++)
 		{
 			tileSquare.position = { 1.5f + i / 2.0f, 1.5f + j / 2.0f };
 			tileSquare.scale = { 0.3f, 0.3f };
-			tileSquare.rotation = glm::radians((float)i * j * 5);
+			tileSquare.rotation = glm::radians((float)i * j);
+			tileSquare.color = { (i % 4) * 0.25f, (j % 5) * 0.2f, 0.3f, 1.0f};
 			Mawar::Renderer2D::DrawQuad(tileSquare);
 		}
 		Mawar::Renderer2D::DrawQuad(Mawar::Renderer2D::QuadProps());

@@ -36,6 +36,8 @@ namespace Mawar
 
 		std::array<Ref<Texture2D>, MAX_TEX_SLOTS> texSlots;
 		uint32_t currentTexIndex = 1; // Reserve 0 for white texture
+
+		glm::vec4 verticesPosition[4];
 	};
 	static Renderer2DStorage s_Data;
 
@@ -85,6 +87,11 @@ namespace Mawar
 		for (uint32_t i = 0; i < s_Data.MAX_TEX_SLOTS; i++)
 			sampler2D[i] = i;
 		s_Data.textureShader->SetIntArray("u_Textures", s_Data.MAX_TEX_SLOTS, sampler2D);
+
+		s_Data.verticesPosition[0] = { -0.5f, -0.5f, 0.0f, 1.0f };
+		s_Data.verticesPosition[1] = {  0.5f, -0.5f, 0.0f, 1.0f };
+		s_Data.verticesPosition[2] = {  0.5f,  0.5f, 0.0f, 1.0f };
+		s_Data.verticesPosition[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
 	}
 
 	void Renderer2D::Shutdown()
@@ -128,6 +135,7 @@ namespace Mawar
 	{
 		M_PROFILE_FUNCTION();
 
+		// texture
 		float textureID = -1.0f; // -1 because tex id is not a negative value
 		Ref<Texture2D> texture = quadProps.texture ? quadProps.texture : s_Data.whiteTexture;
 
@@ -144,11 +152,12 @@ namespace Mawar
 			s_Data.currentTexIndex++;
 		}
 
-		s_Data.quadVertexPtr->position = {
-			quadProps.position.x,
-			quadProps.position.y,
-			quadProps.position.z
-		};
+		// transform
+		glm::mat4 transform = Translate(quadProps);
+		transform = quadProps.rotation == 0.0f ? transform : transform * Rotate(quadProps);
+		transform = quadProps.scale.x == 1.0f && quadProps.scale.y == 1.0f ? transform : transform * Scale(quadProps);
+
+		s_Data.quadVertexPtr->position = transform * s_Data.verticesPosition[0];
 		s_Data.quadVertexPtr->color = {
 			quadProps.color.r,
 			quadProps.color.g,
@@ -160,11 +169,7 @@ namespace Mawar
 		s_Data.quadVertexPtr->tilingFactor = quadProps.tilingFactor;
 		s_Data.quadVertexPtr++;
 
-		s_Data.quadVertexPtr->position = {
-			quadProps.position.x + quadProps.scale.x,
-			quadProps.position.y,
-			quadProps.position.z
-		};
+		s_Data.quadVertexPtr->position = transform * s_Data.verticesPosition[1];
 		s_Data.quadVertexPtr->color = {
 			quadProps.color.r,
 			quadProps.color.g,
@@ -176,11 +181,7 @@ namespace Mawar
 		s_Data.quadVertexPtr->tilingFactor = quadProps.tilingFactor;
 		s_Data.quadVertexPtr++;
 
-		s_Data.quadVertexPtr->position = {
-			quadProps.position.x + quadProps.scale.x,
-			quadProps.position.y + quadProps.scale.y,
-			quadProps.position.z
-		};
+		s_Data.quadVertexPtr->position = transform * s_Data.verticesPosition[2];
 		s_Data.quadVertexPtr->color = {
 			quadProps.color.r,
 			quadProps.color.g,
@@ -192,11 +193,7 @@ namespace Mawar
 		s_Data.quadVertexPtr->tilingFactor = quadProps.tilingFactor;
 		s_Data.quadVertexPtr++;
 
-		s_Data.quadVertexPtr->position = {
-			quadProps.position.x,
-			quadProps.position.y + quadProps.scale.y,
-			quadProps.position.z
-		};
+		s_Data.quadVertexPtr->position = transform * s_Data.verticesPosition[3];
 		s_Data.quadVertexPtr->color = {
 			quadProps.color.r,
 			quadProps.color.g,
