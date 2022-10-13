@@ -45,6 +45,21 @@ namespace Mawar
 		static void DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture);
 		static void DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture2D>& texture);
 
+	public:
+		struct Statistics
+		{
+			uint32_t DrawCall = 0;
+			uint32_t Quad = 0;
+
+			const uint32_t GetVertices() const { return Quad * 4; }
+			const uint32_t GetIndices() const { return Quad * 6; }
+		};
+		static Statistics GetStatistics();
+		static void ResetStats();
+
+	private:
+		static void ResetBatch();
+
 	private:
 		static glm::mat4 Translate(const QuadProps& quadProps)
 		{

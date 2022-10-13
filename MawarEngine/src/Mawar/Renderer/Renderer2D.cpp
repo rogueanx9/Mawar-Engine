@@ -18,9 +18,9 @@ namespace Mawar
 
 	struct Renderer2DStorage
 	{
-		const uint32_t MAX_QUADS = 10000;
-		const uint32_t MAX_VERTICES = 4 * MAX_QUADS;
-		const uint32_t MAX_INDICES  = 6 * MAX_QUADS;
+		static const uint32_t MAX_QUADS = 20000;
+		static const uint32_t MAX_VERTICES = 4 * MAX_QUADS;
+		static const uint32_t MAX_INDICES  = 6 * MAX_QUADS;
 		static const uint32_t MAX_TEX_SLOTS = 32; // TODO: Dynamic according to hardware
 
 		uint32_t quadIndexCount = 0;
@@ -38,6 +38,8 @@ namespace Mawar
 		uint32_t currentTexIndex = 1; // Reserve 0 for white texture
 
 		glm::vec4 verticesPosition[4];
+
+		Renderer2D::Statistics stats;
 	};
 	static Renderer2DStorage s_Data;
 
@@ -47,8 +49,8 @@ namespace Mawar
 
 		s_Data.quadVertexArray = VertexArray::Create();
 
-		s_Data.quadVertexBuffer = VertexBuffer::Create(s_Data.MAX_VERTICES * sizeof(QuadVertex));
-		s_Data.quadVertexBase = new QuadVertex[s_Data.MAX_VERTICES];
+		s_Data.quadVertexBuffer = VertexBuffer::Create(Renderer2DStorage::MAX_VERTICES * sizeof(QuadVertex));
+		s_Data.quadVertexBase = new QuadVertex[Renderer2DStorage::MAX_VERTICES];
 
 		s_Data.quadVertexBuffer->SetLayout({
 			{ShaderDataType::Float3, "a_Position"},
@@ -59,9 +61,9 @@ namespace Mawar
 			});
 		s_Data.quadVertexArray->AddVertexBuffer(s_Data.quadVertexBuffer);
 
-		uint32_t* quadIndices = new uint32_t[s_Data.MAX_INDICES];
+		uint32_t* quadIndices = new uint32_t[Renderer2DStorage::MAX_INDICES];
 		uint32_t offset = 0;
-		for (uint32_t i = 0; i < s_Data.MAX_INDICES; i += 6)
+		for (uint32_t i = 0; i < Renderer2DStorage::MAX_INDICES; i += 6)
 		{
 			quadIndices[i + 0] = offset + 0;
 			quadIndices[i + 1] = offset + 1;
@@ -73,7 +75,7 @@ namespace Mawar
 
 			offset += 4;
 		}
-		s_Data.quadVertexArray->SetIndexBuffer(IndexBuffer::Create(quadIndices, s_Data.MAX_INDICES));
+		s_Data.quadVertexArray->SetIndexBuffer(IndexBuffer::Create(quadIndices, Renderer2DStorage::MAX_INDICES));
 		delete[] quadIndices;
 
 		s_Data.textureShader = Shader::Create("assets/shaders/Texture.glsl");
@@ -81,7 +83,6 @@ namespace Mawar
 		s_Data.textureShader->Bind();
 		uint32_t white_data = 0xffffffff;
 		s_Data.whiteTexture = Texture2D::Create(1, 1, &white_data);
-		s_Data.texSlots[0] = s_Data.whiteTexture;
 
 		int sampler2D[s_Data.MAX_TEX_SLOTS];
 		for (uint32_t i = 0; i < s_Data.MAX_TEX_SLOTS; i++)
@@ -99,6 +100,14 @@ namespace Mawar
 		M_PROFILE_FUNCTION();
 	}
 
+	void Renderer2D::ResetBatch()
+	{
+		s_Data.quadIndexCount = 0;
+		s_Data.currentTexIndex = 1;
+		s_Data.quadVertexPtr = s_Data.quadVertexBase;
+		s_Data.texSlots[0] = s_Data.whiteTexture;
+	}
+
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
 		M_PROFILE_FUNCTION();
@@ -106,8 +115,7 @@ namespace Mawar
 		s_Data.textureShader->Bind();
 		s_Data.textureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 
-		s_Data.quadVertexPtr = s_Data.quadVertexBase;
-		s_Data.currentTexIndex = 1;
+		ResetBatch();
 	}
 
 	void Renderer2D::EndScene()
@@ -129,11 +137,20 @@ namespace Mawar
 			s_Data.texSlots[i]->Bind(i);
 
 		RenderCommand::DrawIndexed(s_Data.quadVertexArray, s_Data.quadIndexCount);
+
+		s_Data.stats.DrawCall++;
 	}
 
 	void Renderer2D::DrawQuad(const QuadProps& quadProps)
 	{
 		M_PROFILE_FUNCTION();
+
+		if (s_Data.quadIndexCount  >= Renderer2DStorage::MAX_INDICES || 
+			s_Data.currentTexIndex >= Renderer2DStorage::MAX_TEX_SLOTS)
+		{
+			EndScene();
+			ResetBatch();
+		}
 
 		// texture
 		float textureID = -1.0f; // -1 because tex id is not a negative value
@@ -153,9 +170,7 @@ namespace Mawar
 		}
 
 		// transform
-		glm::mat4 transform = Translate(quadProps);
-		transform = quadProps.rotation == 0.0f ? transform : transform * Rotate(quadProps);
-		transform = quadProps.scale.x == 1.0f && quadProps.scale.y == 1.0f ? transform : transform * Scale(quadProps);
+		glm::mat4 transform = Translate(quadProps) * Rotate(quadProps) * Scale(quadProps);
 
 		s_Data.quadVertexPtr->position = transform * s_Data.verticesPosition[0];
 		s_Data.quadVertexPtr->color = {
@@ -207,25 +222,24 @@ namespace Mawar
 
 		s_Data.quadIndexCount += 6;
 
-		//s_Data.textureShader->SetFloat("u_TilingFactor", quadProps.tilingFactor);
-		//s_Data.textureShader->SetFloat4("u_Color", { quadProps.color.r, quadProps.color.g, quadProps.color.b, quadProps.color.a });
-		//quadProps.texture ? quadProps.texture->Bind() : s_Data.whiteTexture->Bind();
-
-		/*glm::mat4 transform = glm::translate(glm::mat4(1.0f), { quadProps.position.x, quadProps.position.y, quadProps.position.z });
-		transform = quadProps.scale.x == 1.0f && quadProps.scale.y == 1.0f ?
-			transform : 
-			transform * glm::scale(glm::mat4(1.0f), { quadProps.scale.x, quadProps.scale.y, 1.0f });
-		transform = quadProps.rotation == 0.0f ? 
-			transform : 
-			transform * glm::rotate(glm::mat4(1.0f), quadProps.rotation, { 0.0f, 0.0f, 1.0f });
-		s_Data.textureShader->SetMat4("u_Transform", transform);
-
-		s_Data.quadVertexArray->Bind();
-		RenderCommand::DrawIndexed(s_Data.quadVertexArray);*/
+		s_Data.stats.Quad++;
 	}
 
+	// Statistics
+	Renderer2D::Statistics Renderer2D::GetStatistics()
+	{
+		return s_Data.stats;
+	}
+
+	void Renderer2D::ResetStats()
+	{
+		s_Data.stats.DrawCall = 0;
+		s_Data.stats.Quad = 0;
+	}
+
+	// Legacy
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size,
-		                      const glm::vec4& color, const Ref<Texture2D>& texture)
+		const glm::vec4& color, const Ref<Texture2D>& texture)
 	{
 		M_PROFILE_FUNCTION();
 
@@ -247,7 +261,7 @@ namespace Mawar
 	}
 
 	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size,
-		                      const glm::vec4& color, const Ref<Texture2D>& texture)
+		const glm::vec4& color, const Ref<Texture2D>& texture)
 	{
 		DrawQuad({ position.x, position.y, 0.0f }, size, color, texture);
 	}

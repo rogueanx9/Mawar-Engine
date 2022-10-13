@@ -34,6 +34,7 @@ void Sandbox2D::OnUpdate(Mawar::Timestep ts)
 {
 	M_PROFILE_FUNCTION();
 
+	Mawar::Renderer2D::ResetStats();
 	{
 		M_PROFILE_SCOPE("CameraController::OnUpdate");
 		m_CameraController.OnUpdate(ts);
@@ -53,10 +54,10 @@ void Sandbox2D::OnUpdate(Mawar::Timestep ts)
 		Mawar::Renderer2D::DrawQuad({ -0.1f, -0.8f }, { 0.5f,0.5f }, glm::vec4{ 0.2f, 0.8f, 0.3f, 1.0f });
 		Mawar::Renderer2D::DrawQuad({ 0.3f, 0.5f, -0.1f }, { 5.0f,5.0f }, m_Texture);
 		Mawar::Renderer2D::DrawQuad({ 0.3f, 0.5f }, { 1.0f,1.0f }, m_CatColor, m_CatTexture);
-		for (int i = 0; i < 20; i++)
-			for (int j = 0;j < 20;j++)
+		for (int i = 0; i < m_TileCol; i++)
+			for (int j = 0;j < m_TileRow; j++)
 		{
-			tileSquare.position = { 1.5f + i / 2.0f, 1.5f + j / 2.0f };
+			tileSquare.position = { 1.5f + i / 2.0f, 1.5f + j / 2.0f, 0.2f};
 			tileSquare.scale = { 0.3f, 0.3f };
 			tileSquare.rotation = glm::radians((float)i * j);
 			tileSquare.color = { (i % 4) * 0.25f, (j % 5) * 0.2f, 0.3f, 1.0f};
@@ -71,8 +72,14 @@ void Sandbox2D::OnImGuiRender()
 {
 	ImGui::Begin("Sandbox 2D");
 	ImGui::ColorEdit3("Clear Color", glm::value_ptr(m_ClearColor));
-	ImGui::ColorEdit4("Square Color", glm::value_ptr(m_Color));
-	ImGui::ColorEdit4("Cat Tint Color", glm::value_ptr(m_CatColor));
+	//ImGui::ColorEdit4("Square Color", glm::value_ptr(m_Color));
+	//ImGui::ColorEdit4("Cat Tint Color", glm::value_ptr(m_CatColor));
+	ImGui::SliderInt("Tile Row", &m_TileRow, 1, 200);
+	ImGui::SliderInt("Tile Column", &m_TileCol, 1, 200);
+	ImGui::Text("Draw calls: %d", Mawar::Renderer2D::GetStatistics().DrawCall);
+	ImGui::Text("Quad count: %d", Mawar::Renderer2D::GetStatistics().Quad);
+	ImGui::Text("Vertice count: %d", Mawar::Renderer2D::GetStatistics().GetVertices());
+	ImGui::Text("Indice count: %d", Mawar::Renderer2D::GetStatistics().GetIndices());
 	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	ImGui::End();
 }
