@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\ExampleLayer.cpp" />
+    <ClCompile Include="src\ParticleSystem.cpp" />
     <ClCompile Include="src\Sandbox.cpp" />
     <ClCompile Include="src\Sandbox2D.cpp" />
   </ItemGroup>
@@ -146,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ExampleLayer.hpp" />
+    <ClInclude Include="src\ParticleSystem.hpp" />
     <ClInclude Include="src\Sandbox2D.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

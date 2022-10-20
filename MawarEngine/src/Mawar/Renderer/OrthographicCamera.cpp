@@ -6,7 +6,9 @@
 namespace Mawar
 {
 	OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top)
-		: m_ProjectionMatrix(glm::ortho(left, right, bottom, top)), m_ViewMatrix(1.0f)
+		: m_Left(left), m_Right(right), m_Bottom(bottom), m_Top(top),
+		  m_ProjectionMatrix(glm::ortho(left, right, bottom, top)), 
+		  m_ViewMatrix(1.0f)
 	{
 		M_PROFILE_FUNCTION();
 
@@ -16,7 +18,7 @@ namespace Mawar
 	void OrthographicCamera::SetProjection(float left, float right, float bottom, float top)
 	{
 		M_PROFILE_FUNCTION();
-
+		m_Left = left; m_Right = right; m_Bottom = bottom; m_Top = top;
 		m_ProjectionMatrix = glm::ortho(left, right, bottom, top);
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}

@@ -20,7 +20,6 @@ namespace Mawar
 	{
 		M_PROFILE_FUNCTION();
 
-		layer->OnAttach();
 		m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, layer);
 		m_LayerInsertIndex++;
 	}
@@ -29,7 +28,6 @@ namespace Mawar
 	{
 		M_PROFILE_FUNCTION();
 
-		layer->OnAttach();
 		m_Layers.emplace_back(layer);
 	}
 
